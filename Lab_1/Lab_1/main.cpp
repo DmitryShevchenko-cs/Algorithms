@@ -4,7 +4,7 @@ int main() {
 
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
-
+	list lst;
 	short choice = -1;
 
 	while (true) {
@@ -22,11 +22,12 @@ int main() {
 
 		switch (choice) {
 		case 1:
-
+			lst.Add('b');
 			break;
 
 		case 2:
-
+			lst.Add('a');
+			lst.show();
 			break;
 		
 		case 3:
@@ -50,6 +51,7 @@ int main() {
 			break;
 
 		case 8:
+			lst.show();
 			cout << "Вихід ..." << endl;
 			return 1;
 

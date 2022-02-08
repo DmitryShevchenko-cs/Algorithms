@@ -5,12 +5,19 @@
 
 using namespace std;
 
-void create();
-void add();
-void del();
-void number();
-void unite();
-void clear();
+struct Data {
+	char data;
+	Data* n;
+	Data* p;
+};
 
-void print();
+class list {
+	Data *head, *tail;
+public:
+	list() : head(NULL), tail(NULL) {};
+	~list();
+	void show();
+	void Add(char data);
+};
+
 
