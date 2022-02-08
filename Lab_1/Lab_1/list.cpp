@@ -97,3 +97,53 @@ void list::del(int num) {
     temp2->n->p = temp->p;
     delete temp;
 }
+
+
+void list::swap(int first, int second) {
+
+    Data* temp1 = head, * temp2 = head;
+
+    for (int i = 0; i < first - 1; ++i)
+        temp1 = temp1->n;
+
+    for (int i = 0; i < second - 1; ++i)
+        temp2 = temp2->n;
+
+    if (temp1->p == NULL) {
+       
+        temp2->n->p = temp1;
+
+        temp1->n = temp2->n;
+        temp2->n = temp1;
+        temp1->p = temp2;
+        temp2->p = NULL;
+        head = temp2;
+        return;
+    }
+
+    if (temp2->n == NULL) {
+        temp1->p->n = temp2;
+
+        temp2->p = temp1->p;
+        temp2->n = temp1;
+        temp1->p = temp2;
+        temp1->n = NULL;
+        tail = temp1;
+        return;
+    }
+    
+
+    temp1->p->n = temp2;
+    temp2->n->p = temp1;
+
+    temp1->n = temp2->n;
+    temp2->n = temp1;
+
+    temp2->p = temp1->p;
+    temp1->p = temp2;
+   
+
+  
+
+
+}

@@ -20,6 +20,7 @@ public:
 	void Add(char data);
 	void del(int num);
 	short number();
+	void swap(int first, int second);
 };
 
 

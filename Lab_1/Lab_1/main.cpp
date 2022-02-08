@@ -24,11 +24,11 @@ int main() {
 
 		switch (choice) {
 		case 1:
-			lst.Add('b');
+			lst.Add('a');
 			break;
 
 		case 2:
-			lst.Add('a');
+			lst.Add('b');
 			lst.show();
 			break;
 		
@@ -42,7 +42,8 @@ int main() {
 			break;
 
 		case 5:
-
+			lst.swap(1, 2);
+			lst.show();
 			break;
 
 		case 6:
