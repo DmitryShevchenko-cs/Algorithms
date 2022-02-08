@@ -8,7 +8,7 @@ int main() {
 	short choice = -1;
 
 	while (true) {
-		
+		cout << "-----------------------------------------------------\n";
 		cout << "Оберіти дію" << endl;
 		cout << "1 - Сформувати список" << endl;
 		cout << "2 - Додати елемент до писку (в кінець)" << endl;
@@ -18,6 +18,8 @@ int main() {
 		cout << "6 - Об'еднати два списки в один" << endl;
 		cout << "7 - Очистити список" << endl;
 		cout << "8 - Вихід" << endl;
+		cout << "-----------------------------------------------------\n";
+
 		cin >> choice;
 
 		switch (choice) {
@@ -31,11 +33,12 @@ int main() {
 			break;
 		
 		case 3:
-
+			lst.del(3);
+			lst.show();
 			break;
 
 		case 4:
-
+			cout << lst.number() << endl;
 			break;
 
 		case 5:

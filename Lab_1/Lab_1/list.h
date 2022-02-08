@@ -18,6 +18,8 @@ public:
 	~list();
 	void show();
 	void Add(char data);
+	void del(int num);
+	short number();
 };
 
 
