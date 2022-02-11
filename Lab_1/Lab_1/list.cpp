@@ -109,6 +109,17 @@ void list::swap(int first, int second) {
     for (int i = 0; i < second - 1; ++i)
         temp2 = temp2->n;
 
+    if (temp2 == tail) {
+
+        temp1->n = NULL;
+        temp2->n = temp1;
+        temp1->p = temp2;
+        head = temp2;
+        tail = temp1;
+        return;
+
+    }
+
     if (temp1->p == NULL) {
        
         temp2->n->p = temp1;
@@ -132,6 +143,7 @@ void list::swap(int first, int second) {
         return;
     }
     
+  
 
     temp1->p->n = temp2;
     temp2->n->p = temp1;
@@ -141,9 +153,13 @@ void list::swap(int first, int second) {
 
     temp2->p = temp1->p;
     temp1->p = temp2;
-   
 
-  
+}
 
+void list::merge(list LIST) {
+
+    this->tail->n = LIST.head;
+    LIST.head->p = this->tail;
+    this->tail = LIST.tail;
 
 }

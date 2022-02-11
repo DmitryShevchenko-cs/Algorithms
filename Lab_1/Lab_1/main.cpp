@@ -5,6 +5,7 @@ int main() {
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 	list lst;
+	list LST;
 	short choice = -1;
 
 	while (true) {
@@ -47,7 +48,11 @@ int main() {
 			break;
 
 		case 6:
-
+			for (int i = 0; i < 3; i++)
+				LST.Add('q');
+			LST.show();
+			lst.merge(LST);
+			lst.show();
 			break;
 
 		case 7:
@@ -58,7 +63,9 @@ int main() {
 			lst.show();
 			cout << "Вихід ..." << endl;
 			return 1;
-
+		
+		default:
+			cout << "Вы ввели неверный номер, попробуйте еще раз" << endl << endl;
 
 		}
 

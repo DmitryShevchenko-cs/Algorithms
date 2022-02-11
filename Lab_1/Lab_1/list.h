@@ -7,7 +7,7 @@ using namespace std;
 
 struct Data {
 	char data;
-	Data* n;
+	Data* n;	//int
 	Data* p;
 };
 
@@ -21,6 +21,7 @@ public:
 	void del(int num);
 	short number();
 	void swap(int first, int second);
+	void merge(list LIST);
 };
 
 
