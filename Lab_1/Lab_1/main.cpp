@@ -50,6 +50,7 @@ int main() {
 		case 6:
 			for (int i = 0; i < 3; i++)
 				LST.Add('q');
+
 			LST.show();
 			lst.merge(LST);
 			lst.show();

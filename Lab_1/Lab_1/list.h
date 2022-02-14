@@ -21,7 +21,7 @@ public:
 	void del(int num);
 	short number();
 	void swap(int first, int second);
-	void merge(list LIST);
+	void merge(list& LIST);
 };
 
 

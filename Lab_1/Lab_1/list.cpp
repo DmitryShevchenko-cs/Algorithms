@@ -53,12 +53,11 @@ short list::number() {
 
     short number = 0;
     Data* tempH = head;
-    Data* tempT = tail;
+  
     while (tempH)
     {
         number++;
-        tempT = tempH->n;
-        tempH = tempT;
+        tempH = tempH->n;
     }
     return number;
 }
@@ -80,7 +79,7 @@ void list::del(int num) {
         return;
 
     }
-    if (num == number()) {                 //last elem num==count
+    if (num == number()) {       
         Data* temp = tail;
         tail = tail->p;
         tail->n = NULL;
@@ -109,18 +108,19 @@ void list::swap(int first, int second) {
     for (int i = 0; i < second - 1; ++i)
         temp2 = temp2->n;
 
-    if (temp2 == tail) {
+    if (temp2 == tail) { // если список из двух елементов
 
         temp1->n = NULL;
         temp2->n = temp1;
         temp1->p = temp2;
+        temp2->p = NULL;
         head = temp2;
         tail = temp1;
         return;
 
     }
 
-    if (temp1->p == NULL) {
+    if (temp1->p == NULL) { // если два первых елемента
        
         temp2->n->p = temp1;
 
@@ -132,7 +132,7 @@ void list::swap(int first, int second) {
         return;
     }
 
-    if (temp2->n == NULL) {
+    if (temp2->n == NULL) { // если два последних елемента
         temp1->p->n = temp2;
 
         temp2->p = temp1->p;
@@ -143,23 +143,27 @@ void list::swap(int first, int second) {
         return;
     }
     
-  
+    else {
+        temp1->p->n = temp2;
+        temp2->n->p = temp1;
 
-    temp1->p->n = temp2;
-    temp2->n->p = temp1;
+        temp1->n = temp2->n;
+        temp2->n = temp1;
 
-    temp1->n = temp2->n;
-    temp2->n = temp1;
-
-    temp2->p = temp1->p;
-    temp1->p = temp2;
+        temp2->p = temp1->p;
+        temp1->p = temp2;
+    }
 
 }
 
-void list::merge(list LIST) {
+void list::merge(list &LIST) {
 
-    this->tail->n = LIST.head;
-    LIST.head->p = this->tail;
-    this->tail = LIST.tail;
+    Data* temp = LIST.head;
 
+    while (temp) {
+        this->Add(temp->data);
+        temp = temp->n;
+
+    }
+    
 }
