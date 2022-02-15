@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include "windows.h"
+#include "fstream"
 
 using namespace std;
 
@@ -12,16 +13,18 @@ struct Data {
 };
 
 class list {
-	Data *head, *tail;
+	Data* head, * tail;
 public:
 	list() : head(NULL), tail(NULL) {};
 	~list();
+	void create(int num);
 	void show();
 	void Add(char data);
 	void del(int num);
 	short number();
-	void swap(int first, int second);
+	void swap(int choice);
 	void merge(list& LIST);
+	void save();
 };
 
 

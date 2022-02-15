@@ -29,6 +29,16 @@ void list::Add(char ch)
     }
 }
 
+void list::create(int num) {
+
+    char ch;
+    for (int i = 0; i < num; i++) {
+        cout << "¬ведите символ > ";
+        cin >> ch;
+        Add(ch);
+    }
+}
+
 void list::show()
 {
    
@@ -83,7 +93,6 @@ void list::del(int num) {
         Data* temp = tail;
         tail = tail->p;
         tail->n = NULL;
-        delete temp;
         return;
     }
 
@@ -94,21 +103,21 @@ void list::del(int num) {
     temp2 = temp;
     temp2->p->n = temp->n;
     temp2->n->p = temp->p;
-    delete temp;
+    
 }
 
 
-void list::swap(int first, int second) {
+void list::swap(int choice) {
 
     Data* temp1 = head, * temp2 = head;
 
-    for (int i = 0; i < first - 1; ++i)
+    for (int i = 0; i < choice - 1; ++i)
         temp1 = temp1->n;
 
-    for (int i = 0; i < second - 1; ++i)
+    for (int i = 0; i < choice; ++i)
         temp2 = temp2->n;
 
-    if (temp2 == tail) { // если список из двух елементов
+    if (temp1== head && temp2 == tail) { // если список из двух елементов
 
         temp1->n = NULL;
         temp2->n = temp1;
@@ -140,6 +149,7 @@ void list::swap(int first, int second) {
         temp1->p = temp2;
         temp1->n = NULL;
         tail = temp1;
+
         return;
     }
     
@@ -152,8 +162,10 @@ void list::swap(int first, int second) {
 
         temp2->p = temp1->p;
         temp1->p = temp2;
-    }
 
+        return;
+    }
+    
 }
 
 void list::merge(list &LIST) {
@@ -165,5 +177,20 @@ void list::merge(list &LIST) {
         temp = temp->n;
 
     }
-    
+    LIST.~list();
+}
+
+void list::save() {
+
+    Data* temp = head;
+
+    fstream f("List.txt", ios::out); 
+    if (!f.is_open())
+        cout << "ќшибка открыти€ файла на запись";
+    else {
+        while (temp) {
+            f << temp->data << '\t';
+            temp = temp->n;
+        }
+    }
 }

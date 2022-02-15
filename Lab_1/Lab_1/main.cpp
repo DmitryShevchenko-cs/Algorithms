@@ -7,6 +7,7 @@ int main() {
 	list lst;
 	list LST;
 	short choice = -1;
+	char ch;
 
 	while (true) {
 		cout << "-----------------------------------------------------\n";
@@ -25,16 +26,25 @@ int main() {
 
 		switch (choice) {
 		case 1:
-			lst.Add('a');
+			lst.create(2);
+			lst.show();
 			break;
 
 		case 2:
-			lst.Add('b');
+			cout << "Введите символ > ";
+			cin >> ch;
+			lst.Add(ch);
 			lst.show();
 			break;
 		
 		case 3:
-			lst.del(3);
+			lst.show();
+			cout << "Введите номер удаляемого символа > ";
+			
+			cin >> choice;
+			if(choice <= lst.number() && choice > 0)
+				lst.del(choice);
+			else cout << "Вы ввели неверный номер, попробуйте еще раз > \n";
 			lst.show();
 			break;
 
@@ -43,25 +53,32 @@ int main() {
 			break;
 
 		case 5:
-			lst.swap(1, 2);
-			lst.show();
+
+			cout << "Введите номер удаляемого символа > ";
+			cin >> choice;
+			if (choice < lst.number() && choice > 0) {
+				lst.swap(choice);
+				lst.show();
+			}
+			else cout << "Вы ввели неверный номер, попробуйте еще раз > \n";
+			
 			break;
 
 		case 6:
-			for (int i = 0; i < 3; i++)
-				LST.Add('q');
-
-			LST.show();
+			
+			LST.create(3);
 			lst.merge(LST);
 			lst.show();
 			break;
 
 		case 7:
-
+			lst.save();
+			lst.~list();
 			break;
 
 		case 8:
 			lst.show();
+			lst.save();
 			cout << "Вихід ..." << endl;
 			return 1;
 		
