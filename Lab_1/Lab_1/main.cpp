@@ -85,7 +85,7 @@ int main() {
 			break;
 
 		case 5:
-			cout << "Список: ";
+			
 			lst.show();
 			cout << "Введіть номер символу, щоб замінити його з наступним > ";
 			cin >> choice;

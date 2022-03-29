@@ -71,16 +71,18 @@ void list::createFromFile(string file) {
 
 void list::show()
 {
-   
     Data* temp = head;
     if (temp == 0)
         cout << "Список пуст";
-    while (temp != NULL)
-    {
-        cout << temp->data << " ";
-        temp = temp->n;
+    else {
+        cout << "Список: ";
+        while (temp != NULL)
+        {
+            cout << temp->data << " ";
+            temp = temp->n;
+        }
+        cout << endl;
     }
-    cout << endl;
     
 }
 
