@@ -30,33 +30,58 @@ void list::Add(char ch)
 }
 
 void list::create(int num) {
+    while (head)
+    {
+        tail = head->n;
+        delete head;
+        head = tail;
+    }
 
     char ch;
     for (int i = 0; i < num; i++) {
-        cout << "Введите символ > ";
+        cout << "Введіть символ > ";
         cin >> ch;
         Add(ch);
     }
+}
+
+void list::createFromFile(string file) {
+
+    while (head)
+    {
+        tail = head->n;
+        delete head;
+        head = tail;
+    }
+
+    ifstream fin(file);
+    char ch;
+    if (!fin) {
+        cout << "File can't be open";
+    }
+    else {
+        while (fin.get(ch)) {
+            if(ch!= '\t')
+                Add(ch);
+        }
+    }
+
+
 }
 
 void list::show()
 {
    
     Data* temp = head;
+    if (temp == 0)
+        cout << "Список пуст";
     while (temp != NULL)
     {
         cout << temp->data << " ";
         temp = temp->n;
     }
-    cout << "\n" << "\n";
-   
-   /* temp = tail;
-    while (temp != NULL)
-    {
-        cout << temp->data << " ";
-        temp = temp->p;
-    }
-    cout << "\n";*/
+    cout << endl;
+    
 }
 
 short list::number() {

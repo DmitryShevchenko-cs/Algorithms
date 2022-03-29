@@ -8,7 +8,7 @@ using namespace std;
 
 struct Data {
 	char data;
-	Data* n;	//int
+	Data* n;	
 	Data* p;
 };
 
@@ -18,6 +18,7 @@ public:
 	list() : head(NULL), tail(NULL) {};
 	~list();
 	void create(int num);
+	void createFromFile(string file);
 	void show();
 	void Add(char data);
 	void del(int num);
