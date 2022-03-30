@@ -171,7 +171,6 @@ void list::swap(int choice) {
 
     if (temp2->n == NULL) { // если два последних елемента
         temp1->p->n = temp2;
-
         temp2->p = temp1->p;
         temp2->n = temp1;
         temp1->p = temp2;
