@@ -13,6 +13,7 @@ struct Data {
 };
 
 class list {
+
 	Data* head, * tail;
 public:
 	list() : head(NULL), tail(NULL) {};
@@ -25,7 +26,24 @@ public:
 	short number();
 	void swap(int choice);
 	void merge(list& LIST);
-	void save();
+	void save();	
 };
 
+class circularList {
+	Data* root;
+
+public:
+	circularList() : root(NULL) {};
+	~circularList();
+	void create(int num);
+	void createFromFile(string file);
+	void show();
+	void Add(char data);
+	void del(char ch);
+	short number();
+	void swap(int choice);
+	void merge(circularList& LIST);
+	void save();
+
+};
 
