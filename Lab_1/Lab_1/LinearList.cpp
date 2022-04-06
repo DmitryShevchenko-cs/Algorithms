@@ -90,12 +90,12 @@ void list::show()
 short list::number() {
 
     short number = 0;
-    Data* tempH = head;
+    Data* temp = head;
   
-    while (tempH)
+    while (temp)
     {
         number++;
-        tempH = tempH->n;
+        temp = temp->n;
     }
     return number;
 }
@@ -196,7 +196,7 @@ void list::swap(int choice) {
     
 }
 
-void list::merge(list &LIST) {
+void list::merge(list &LIST) { // переробити
 
     Data* temp = LIST.head;
 

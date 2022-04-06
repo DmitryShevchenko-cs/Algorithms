@@ -30,10 +30,10 @@ public:
 };
 
 class circularList {
-	Data* root;
+	Data* _root;
 
 public:
-	circularList() : root(NULL) {};
+	circularList() : _root(NULL) {};
 	~circularList();
 	void create(int num);
 	void createFromFile(string file);
@@ -41,7 +41,7 @@ public:
 	void Add(char data);
 	void del(char ch);
 	short number();
-	void swap(int choice);
+	void swap(char ch);
 	void merge(circularList& LIST);
 	void save();
 
