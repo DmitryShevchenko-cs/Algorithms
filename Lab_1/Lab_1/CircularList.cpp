@@ -1,8 +1,9 @@
 #include "list.h"
 
-circularList::~circularList() 
+circularList::~circularList()
 {
-    Data* temp;
+    
+    Data* temp =_root;
     while (_root)
     {
         temp = _root->n;
@@ -10,30 +11,18 @@ circularList::~circularList()
         _root = temp;
     }
 
-   /* do{
-        temp = root->n;
-        delete root;
-        root = temp;
-    } while (root->n);*/
-
-
 }
-void circularList::create(int num) 
+void circularList::create(int num) //+++
 {
     char ch;
     Data* temp;
 
-    while (_root)
-    {
-        temp = _root->n;
-        delete _root;
-        _root = temp;
-    }
-    
     temp = new Data;
     cout << "Введіть символ > ";
     cin >> ch;
     temp->data = ch;
+    _root = temp;
+    _root->n = NULL;
     if(num > 1)
         for (int i = 0; i < num - 1; i++) {
             cout << "Введіть символ > ";
@@ -42,15 +31,10 @@ void circularList::create(int num)
         }
 
 }
-void circularList::createFromFile(string file) 
+void circularList::createFromFile(string file) //+++
 {
-    Data* temp;
-    while (_root)
-    {
-        temp = _root->n;
-        delete _root;
-        _root = temp;
-    }
+    Data* temp = new Data;
+
 
     ifstream fin(file);
     char ch;
@@ -58,6 +42,10 @@ void circularList::createFromFile(string file)
         cout << "Не вдалося відкрити файл";
     }
     else {
+        fin.get(ch);
+        temp->data = ch;
+        _root = temp;
+        _root->n = NULL;
         while (fin.get(ch)) {
             if (ch != '\t')
                 Add(ch);
@@ -65,76 +53,88 @@ void circularList::createFromFile(string file)
     }
 
 }
-void circularList::show() 
+void circularList::show() //+++
 {
     Data* temp;
     temp = _root;
-    while (temp != _root)
-    {
+    if (_root->n) 
+        do
+        {
+            cout << temp->data << " ";
+            temp = temp->n;
+        } while (temp != _root);
+    else
         cout << temp->data;
-        temp = temp->n; 
-    } 
+    
+    cout << endl;
 }
-void circularList::Add(char ch) 
+void circularList::Add(char ch)//+++
 {
 
     Data* temp = new Data;
     temp->data = ch;
 
-    if (_root != NULL)
+    temp->n = _root;
+    
+    if (_root->n)
     {
-        temp->n = _root;
-        if (_root->n) 
-        {
-            temp->p = _root->p->n;
-            _root->p->n = temp;
-        }
-            
-        else
-            _root->n = temp;
-        _root->p = temp;
-       
+        temp->p = _root->p->n;
+        _root->p->n = temp;
+    }
+
+    else {
+        temp->p = _root;
+        _root->n = temp;
+    }
+    _root->p = temp;
+
+
+}
+void circularList::del(char ch) // надо сделать условия когда первые два последние два и тд
+{
+   
+    Data* temp = _root;
+
+    if (_root->data == ch) {
+
+        return;
     }
     else
     {
-        create(1);
-    }
-
-}
-void circularList::del(char ch) 
-{
-
-    Data* temp = _root->n;
-
-    while (temp != _root)
-    {
-        if (temp->data == ch) 
+        while (ch != temp->data)
         {
-            temp->p->n = temp->n;
-            temp->n->p = temp->p;
-
-            break;
-        }
-        else
             temp = temp->n;
+        }
+
+        Data* tprev, * tnext;
+        tprev = temp->p;
+        tnext = temp->n;
+        tprev->n = temp->n;
+        tnext->p = temp->p;
+        delete temp;
     }
+    
+
+   
+
+
 
 }
-short circularList::number() 
+short circularList::number() //+++
 {
     short num = 0;
-    Data* temp = _root->n;
+    Data* temp = _root;
 
-    while (temp != _root)
+    do
     {
         num++;
         temp = temp->n;
-    }
+    } while (temp != _root);
 
     return num;
 
 }
-void circularList::swap(char ch)
+void circularList::swap(char ch)//+++
 {
     Data* temp1 = _root, * temp2;
 
@@ -156,10 +156,14 @@ void circularList::swap(char ch)
 void circularList::merge(circularList& LIST) 
 {
 
-
+    _root->p->n = LIST._root;
+    LIST._root->p->n = _root;
+    _root->p = LIST._root->p;
+    LIST._root->p = _root->p;
+       
 
 }
-void circularList::save() 
+void circularList::save() //+++
 {
     Data* temp = _root;
 
@@ -167,12 +171,29 @@ void circularList::save()
     if (!f.is_open())
         cout << "Ошибка открытия файла на запись";
     else {
-        while (temp != _root) {
+        do {
             f << temp->data << '\t';
             temp = temp->n;
-        }
+        } while (temp != _root);
     }
 
+}
 
+bool circularList::isChar(char ch) {
+
+    Data* temp = _root;
+
+    do
+    {
+        if (temp->data == ch)
+        {
+            return 1;
+        }
+        else
+            temp = temp->n;
+
+    } while (temp != _root);
+
+    return 0;
 
 }

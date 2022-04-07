@@ -2,11 +2,13 @@
 
 list::~list() {
     
+    Data* temp;
+   
     while (head)
     {
-        tail = head->n;
+        temp = head->n;
         delete head;
-        head = tail;
+        head = temp;
     }
 }
 
@@ -30,12 +32,6 @@ void list::Add(char ch)
 }
 
 void list::create(int num) {
-    while (head)
-    {
-        tail = head->n;
-        delete head;
-        head = tail;
-    }
 
     char ch;
     for (int i = 0; i < num; i++) {
@@ -46,13 +42,6 @@ void list::create(int num) {
 }
 
 void list::createFromFile(string file) {
-
-    while (head)
-    {
-        tail = head->n;
-        delete head;
-        head = tail;
-    }
 
     ifstream fin(file);
     char ch;
@@ -73,17 +62,15 @@ void list::show()
 {
 
     Data* temp = head;
-    if (temp == 0)
-        cout << "Список пуст" << endl;
-    else {
-        cout << "Список: ";
-        while (temp != NULL)
-        {
-            cout << temp->data << " ";
-            temp = temp->n;
-        }
-        cout << endl;
+
+    cout << "Список: ";
+    while (temp != NULL)
+    {
+        cout << temp->data << " ";
+        temp = temp->n;
     }
+    cout << endl;
+
 
 }
 
@@ -142,8 +129,7 @@ void list::swap(int choice) {
     for (int i = 0; i < choice - 1; ++i)
         temp1 = temp1->n;
 
-    for (int i = 0; i < choice; ++i)
-        temp2 = temp2->n;
+    temp2 = temp1->n;
 
 
 
@@ -200,12 +186,10 @@ void list::merge(list &LIST) { // переробити
 
     Data* temp = LIST.head;
 
-    while (temp) {
-        this->Add(temp->data);
-        temp = temp->n;
+    temp->p = tail;
+    tail->n = temp;
+    tail = LIST.tail;
 
-    }
-    LIST.~list();
 }
 
 void list::save() {

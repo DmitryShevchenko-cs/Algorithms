@@ -44,6 +44,6 @@ public:
 	void swap(char ch);
 	void merge(circularList& LIST);
 	void save();
-
+	bool isChar(char ch);
 };
 
