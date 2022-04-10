@@ -2,16 +2,16 @@
 
 circularList::~circularList()
 {
-    Data* temp = _root;
+    Data* temp = head;
     short size = number();
     while (size != 0) 
     {
-        Data* temp = _root->n;
-        delete _root;                           
-        _root = temp;
+        Data* temp = head->n;
+        delete head;                           
+        head = temp;
         size--;                                
     }
-    _root = NULL;
+    head = NULL;
 }
 void circularList::create(int num) //+++
 {
@@ -22,8 +22,8 @@ void circularList::create(int num) //+++
     cout << "Введіть символ > ";
     cin >> ch;
     temp->data = ch;
-    _root = temp;
-    _root->n = NULL;
+    head = temp;
+    head->n = NULL;
     if(num > 1)
         for (int i = 0; i < num - 1; i++) {
             cout << "Введіть символ > ";
@@ -45,8 +45,8 @@ void circularList::createFromFile(string file) //+++
     else {
         fin.get(ch);
         temp->data = ch;
-        _root = temp;
-        _root->n = NULL;
+        head = temp;
+        head->n = NULL;
         while (fin.get(ch)) {
             if (ch != ' ')
                 Add(ch);
@@ -60,13 +60,13 @@ void circularList::show() //+++
         cout << "Список пуст" << endl;
     else {
         Data* temp;
-        temp = _root;
-        if (_root->n)
+        temp = head;
+        if (head->n)
             do
             {
                 cout << temp->data << " ";
                 temp = temp->n;
-            } while (temp != _root);
+            } while (temp != head);
         else
             cout << temp->data;
 
@@ -81,20 +81,20 @@ void circularList::Add(char ch)//+++
         Data* temp = new Data;
         temp->data = ch;
 
-        temp->n = _root;
+        temp->n = head;
 
-        if (_root->n)
+        if (head->n)
         {
-            temp->p = _root->p->n;
-            _root->p->n = temp;
-            _root->p = temp;
+            temp->p = head->p->n;
+            head->p->n = temp;
+            head->p = temp;
         }
         else {
-            temp->p = _root;
+            temp->p = head;
 
-            _root->n = temp;
+            head->n = temp;
         }
-        _root->p = temp;
+        head->p = temp;
     }
 }
 void circularList::del(char ch)// если последний
@@ -105,23 +105,23 @@ void circularList::del(char ch)// если последний
        
         Data* tempR;
 
-        if (ch == _root->data) { // first
-            tempR = _root->n;
-            Data* temp = _root->n;
-            temp->p = _root->p;
-            _root->p->n = temp;
-            delete _root;
-            _root = tempR;
+        if (ch == head->data) { // first
+            tempR = head->n;
+            Data* temp = head->n;
+            temp->p = head->p;
+            head->p->n = temp;
+            delete head;
+            head = tempR;
         }
 
-        if (ch == _root->p->data){
+        if (ch == head->p->data){
             
           
             
         }
 
         else {
-            Data* temp = _root;
+            Data* temp = head;
 
             while (ch != temp->data)
             {
@@ -142,13 +142,13 @@ short circularList::number() //+++
 {
     short num = 0;
 
-    Data* temp = _root;
+    Data* temp = head;
 
     do
     {
         num++;
         temp = temp->n;
-    } while (temp != _root);
+    } while (temp != head);
 
 
     return num;
@@ -159,7 +159,7 @@ void circularList::swap(char ch)//+++
     if (isEmpty())
         cout << "Список пуст" << endl;
     else {
-        Data* temp1 = _root, * temp2;
+        Data* temp1 = head, * temp2;
 
         while (ch != temp1->data)
         {
@@ -167,8 +167,8 @@ void circularList::swap(char ch)//+++
         }
         temp2 = temp1->n; //наступний елемент після темп
 
-        if (temp1 == _root)
-            _root = temp2;
+        if (temp1 == head)
+            head = temp2;
         
         temp1->p->n = temp2;
         temp2->n->p = temp1;
@@ -186,7 +186,7 @@ void circularList::save() //+++
     if (isEmpty())
         cout << "Список пуст" << endl;
     else {
-        Data* temp = _root;
+        Data* temp = head;
 
         fstream f("List.txt", ios::out);
         if (!f.is_open())
@@ -195,14 +195,14 @@ void circularList::save() //+++
             do {
                 f << temp->data << ' ';
                 temp = temp->n;
-            } while (temp != _root);
+            } while (temp != head);
         }
     }
 }
 
 bool circularList::isChar(char ch) {
 
-    Data* temp = _root;
+    Data* temp = head;
 
     do
     {
@@ -213,12 +213,12 @@ bool circularList::isChar(char ch) {
         else
             temp = temp->n;
 
-    } while (temp != _root);
+    } while (temp != head);
 
     return 0;
 
 }
 
 bool circularList::isEmpty() {
-    return _root == NULL ? true : false;
+    return head == NULL ? true : false;
 }

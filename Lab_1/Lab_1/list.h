@@ -30,10 +30,10 @@ public:
 };
 
 class circularList {
-	Data* _root;
+	Data* head;
 
 public:
-	circularList() : _root(NULL) {};
+	circularList() : head(NULL) {};
 	~circularList();
 	void create(int num);
 	void createFromFile(string file);
