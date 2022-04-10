@@ -62,13 +62,13 @@ int main() {
 			}
 			cout << "-----------------------------------------------------\n\n";
 			break;
+			
 		default:
 			cout << "Ви ввели невірний номер, спробуйте ще раз" << endl;
 			cout << "-----------------------------------------------------\n\n";
+			continue;
 		}
-
 		break;
-
 	}
 	
 	while (true) {
@@ -97,15 +97,22 @@ int main() {
 			break;
 			
 		case 2:
-			cout << "Введіть символ > ";
-			cin >> ch;
+
 			if (!choiceList) {
+				cout << "Введіть символ > ";
+				cin >> ch;
 				lst.Add(ch);
 				lst.show();
 			}
 			else {
-				cLst.Add(ch);
-				cLst.show();
+				if (!cLst.isEmpty()) {
+					cout << "Введіть символ > ";
+					cin >> ch;
+					cLst.Add(ch);
+					cLst.show();
+				}
+				else
+					cout << "Списко пуст" << endl;
 			}
 			
 			cout << "-----------------------------------------------------\n\n";
@@ -124,15 +131,18 @@ int main() {
 				else cout << "Ви ввели невірний номер, спробуйте ще раз > \n";
 			}
 			else {
-				cLst.show();
-				cout << "Введіть символ для видалення > ";
-				cin >> ch;
-				if (cLst.isChar(ch)) {
-					cLst.del(ch);
+				if (!cLst.isEmpty()) {
 					cLst.show();
+					cout << "Введіть символ для видалення > ";
+					cin >> ch;
+					if (cLst.isChar(ch)) {
+						cLst.del(ch);
+						cLst.show();
+					}
+					else cout << "Ви ввели невірний номер, спробуйте ще раз > \n";
 				}
-				else cout << "Ви ввели невірний номер, спробуйте ще раз > \n";
-				
+				else
+					cout << "Списко пуст" << endl;
 			}
 			cout << "-----------------------------------------------------\n\n";
 			break;
@@ -141,9 +151,11 @@ int main() {
 			if (!choiceList) {
 				cout << "Кількість символів у списку: " << lst.number() << endl;
 			}
-			else {
-				cout << "Кількість символів у списку: " << cLst.number() << endl;
-
+			else{
+				if(!cLst.isEmpty())
+					cout << "Кількість символів у списку: " << cLst.number() << endl;
+				else
+					cout << "Списко пуст" << endl;
 			}
 			break;
 
@@ -160,15 +172,19 @@ int main() {
 					cout << "Помилка вводу..." << endl;
 			}
 			else {
-				cLst.show();
-				cout << "Введіть символ, щоб замінити його з наступним > ";
-				cin >> ch;
-				if (cLst.isChar(ch)) {
-					cLst.swap(ch);
+				if (!cLst.isEmpty()) {
 					cLst.show();
+					cout << "Введіть символ, щоб замінити його з наступним > ";
+					cin >> ch;
+					if (cLst.isChar(ch)) {
+						cLst.swap(ch);
+						cLst.show();
+					}
+					else
+						cout << "Помилка вводу..." << endl;
 				}
 				else
-					cout << "Помилка вводу..." << endl;
+					cout << "Списко пуст" << endl;
 
 			}
 			
@@ -176,9 +192,10 @@ int main() {
 			break;
 
 		case 6:
-			cout << "Кількість елементів > ";
-			cin >> choice;
+			
 			if (!choiceList) {
+				cout << "Кількість елементів > ";
+				cin >> choice;
 				if (choice >= 0) {
 					LST.create(choice);
 					lst.merge(LST);
@@ -188,13 +205,7 @@ int main() {
 					cout << "Помилка вводу..." << endl;
 			}
 			else {
-				if (choice >= 0) {
-					cLST.create(choice);
-					cLst.merge(cLST);
-					cLst.show();
-				}
-				else
-					cout << "Помилка вводу..." << endl;
+				cout<<"Ця функція працює тільци з лінійним списком" << endl;
 			}
 			
 			cout << "-----------------------------------------------------\n\n";
@@ -203,11 +214,17 @@ int main() {
 		case 7:
 			if (!choiceList) {
 				lst.save();
+				cout << "Список збережено" << endl;
 			}
 			else {
-				cLst.save();
+				if (!cLst.isEmpty()) {
+					cLst.save();
+					cout << "Список збережено" << endl;
+				}
+				else
+					cout << "Списко пуст" << endl;
 			}
-			cout << "Список збережено" << endl;
+			
 			cout << "-----------------------------------------------------\n\n";
 			break;
 
@@ -216,9 +233,14 @@ int main() {
 				lst.~list();
 			}
 			else {
-				cLst.~circularList();
+				if (!cLst.isEmpty()) {
+					cLst.~circularList();
+					cout << "Список видалено..." << endl;
+				}
+				else
+					cout << "Списко пуст" << endl;
 			}
-			cout << "Список видалено..." << endl;
+			
 			cout << "-----------------------------------------------------\n\n";
 			break;
 

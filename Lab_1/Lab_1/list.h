@@ -42,8 +42,8 @@ public:
 	void del(char ch);
 	short number();
 	void swap(char ch);
-	void merge(circularList& LIST);
 	void save();
 	bool isChar(char ch);
+	bool isEmpty();
 };
 
