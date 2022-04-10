@@ -81,20 +81,23 @@ void circularList::Add(char ch)//+++
         Data* temp = new Data;
         temp->data = ch;
 
-        temp->n = head;
-
+       
+        
         if (head->n)
         {
-            temp->p = head->p->n;
+            temp->p = head->p;
             head->p->n = temp;
             head->p = temp;
+            temp->n = head;
         }
+
         else {
             temp->p = head;
-
+            temp->n = head;
             head->n = temp;
+            head->p = temp;
         }
-        head->p = temp;
+        
     }
 }
 void circularList::del(char ch)// если последний
@@ -112,12 +115,6 @@ void circularList::del(char ch)// если последний
             head->p->n = temp;
             delete head;
             head = tempR;
-        }
-
-        if (ch == head->p->data){
-            
-          
-            
         }
 
         else {
@@ -169,6 +166,9 @@ void circularList::swap(char ch)//+++
 
         if (temp1 == head)
             head = temp2;
+
+        else if (temp2 == head)
+            head = temp1;
         
         temp1->p->n = temp2;
         temp2->n->p = temp1;
