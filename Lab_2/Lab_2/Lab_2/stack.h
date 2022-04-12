@@ -2,17 +2,23 @@
 
 using namespace std;
 
-typedef struct stack{
+typedef struct obj{
 	short data;
-	stack* next;
+	obj* next;
+};
 
-}obj;
-
-class stackWork {
+class stack {
 
 	obj* top;
 
 public:
+	stack() : top(NULL) {};
+	~stack();
 	void push(short d);
 	void popTop();
+	short pull();
+	void show();
+
+	void swapTopTail();
+	void reverse();
 };

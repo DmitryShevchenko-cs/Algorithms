@@ -2,9 +2,20 @@
 
 int main() {
 
-	obj* top = NULL;
+	stack st;
+	st.push(1);
+	st.push(2);
+	st.push(3);
+	st.push(4);
+	st.push(5);
+	st.push(6);
+	st.show();//ok
 
-	obj d; 
-	push(10);
+	st.swapTopTail();//ok
+	st.show();
 
+	st.reverse();//ok
+	st.show();
+
+	return 1;
 }
