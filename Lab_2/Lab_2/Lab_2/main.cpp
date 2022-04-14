@@ -17,5 +17,10 @@ int main() {
 	st.reverse();//ok
 	st.show();
 
+	st.push(7);
+	st.show();
+	st.delEvery2();//ok
+	st.show();
+
 	return 1;
 }

@@ -2,7 +2,7 @@
 
 using namespace std;
 
-typedef struct obj{
+struct obj{
 	short data;
 	obj* next;
 };
@@ -21,4 +21,5 @@ public:
 
 	void swapTopTail();
 	void reverse();
+	void delEvery2();
 };

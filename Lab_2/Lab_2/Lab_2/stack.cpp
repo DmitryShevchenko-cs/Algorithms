@@ -93,5 +93,25 @@ void stack::reverse()
 
 }
 
+void stack::delEvery2()
+{
+	obj* temp1 = top;
+	obj* temp2 = top->next;
 
+	while (temp2) {
+		if (temp2->next) {
+			temp1->next = temp2->next;
+			temp1 = temp2->next;
+		}
 
+		else 
+			temp1->next = NULL;
+		delete temp2;
+
+		if (temp1->next)
+			temp2 = temp1->next;
+		else
+			temp2 = NULL;
+	}
+
+}
