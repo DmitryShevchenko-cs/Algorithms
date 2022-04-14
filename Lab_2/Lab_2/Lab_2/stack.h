@@ -22,4 +22,5 @@ public:
 	void swapTopTail();
 	void reverse();
 	void delEvery2();
+	void delMin();
 };

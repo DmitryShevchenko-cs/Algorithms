@@ -22,5 +22,14 @@ int main() {
 	st.delEvery2();//ok
 	st.show();
 
+	st.push(0);
+	st.show();
+	st.delMin();
+	st.show();
+	st.delMin();
+	st.delMin();
+	st.show();
+	st.delMin();//ok
+	st.show();
 	return 1;
 }

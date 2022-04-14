@@ -115,3 +115,43 @@ void stack::delEvery2()
 	}
 
 }
+
+void stack::delMin()
+{
+	obj* temp = top;
+	obj* tempMin = top;
+	
+	short min = top->data;
+
+	while (temp) {
+		if (min > temp->data) {
+			min = temp->data;
+			tempMin = temp;
+		}
+		temp = temp->next;
+	}
+	temp = top;
+
+	if(tempMin!=top)
+		while (temp->next != tempMin)
+			temp = temp->next;
+
+	if (tempMin == top) {
+		temp = top->next;
+		delete top; 
+		top = temp;
+		return;
+	}
+
+	else if (!tempMin->next) {
+
+		temp->next = NULL;
+		delete tempMin;
+	}
+
+	else {
+		temp->next = tempMin->next;
+		delete tempMin;
+	}
+
+}
