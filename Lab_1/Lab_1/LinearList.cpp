@@ -143,7 +143,8 @@ void list::swap(int choice) {
 
 
 
-        if (temp1 == head && temp2 == tail) { // если список из двух елементов
+        if (temp1 == head && temp2 == tail) // если список из двух елементов
+        { 
 
             temp1->n = NULL;
             temp2->n = temp1;
@@ -155,7 +156,8 @@ void list::swap(int choice) {
 
         }
 
-        if (temp1->p == NULL) { // если два первых елемента
+        if (temp1->p == NULL) // если два первых елемента
+        { 
 
             temp2->n->p = temp1;
             temp1->n = temp2->n;
@@ -166,7 +168,8 @@ void list::swap(int choice) {
             return;
         }
 
-        if (temp2->n == NULL) { // если два последних елемента
+        if (temp2->n == NULL) // если два последних елемента
+        { 
             temp1->p->n = temp2;
             temp2->p = temp1->p;
             temp2->n = temp1;
@@ -192,7 +195,7 @@ void list::swap(int choice) {
     }
 }
 
-void list::merge(list &LIST) { // переробити
+void list::merge(list &LIST) { 
     if (number() == 0)
         cout << "Список пуст" << endl;
     else {
