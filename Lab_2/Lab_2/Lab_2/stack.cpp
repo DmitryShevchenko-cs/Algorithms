@@ -22,7 +22,7 @@ void stack::push(short d)
 	top = temp;
 }
 
-void stack::popTop()
+void stack::pop()
 {
 	if (!top) return;
 
@@ -46,7 +46,7 @@ short stack::pull()
 void stack::show()
 {
 	obj* temp = top;
-
+	cout << "stack: ";
 	while (temp) {
 		cout << temp->data << " ";
 		temp = temp->next;
@@ -154,4 +154,60 @@ void stack::delMin()
 		delete tempMin;
 	}
 
+}
+
+void stack::delTail()
+{
+
+	obj* temp = top;
+	temp->next = NULL;
+	top = top->next;
+	while (top)
+		pop();
+
+	top = temp;
+
+
+
+}
+
+void stack::delHead()
+{
+	obj* temp = top->next;
+	while (temp->next) {
+		pop();
+		temp = temp->next;
+	}
+	pop();
+}
+
+void stack::maxZero()
+{
+
+	obj* temp = top;
+	obj* tempMax = top;
+
+	short max = top->data;
+
+	while (temp) {
+		if (max < temp->data) {
+			max = temp->data;
+			tempMax = temp;
+		}
+		temp = temp->next;
+	}
+
+	temp = new obj;
+	temp->data = 0;
+	temp->next = tempMax->next;
+	tempMax->next = temp;
+	
+}
+
+bool stack::isEmpty()
+{
+	if (top)
+		return 0;
+	else 
+		return 1;
 }

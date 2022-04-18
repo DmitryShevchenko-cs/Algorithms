@@ -1,4 +1,5 @@
 #include <iostream>
+#include "windows.h"
 
 using namespace std;
 
@@ -15,7 +16,7 @@ public:
 	stack() : top(NULL) {};
 	~stack();
 	void push(short d);
-	void popTop();
+	void pop();
 	short pull();
 	void show();
 
@@ -23,4 +24,10 @@ public:
 	void reverse();
 	void delEvery2();
 	void delMin();
+	void delTail();
+	void delHead();
+	void maxZero();
+
+
+	bool isEmpty();
 };
