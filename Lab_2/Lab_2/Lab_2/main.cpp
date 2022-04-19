@@ -7,6 +7,7 @@ int main() {
 	stack st;
 	int choice = -1;
 	short el = 0;
+	
 	while (true) {
 		cout << "----------------------------------------------------------" << endl;
 		cout << "1 - Додати елемент" << endl; // + st.push(1);
@@ -51,7 +52,7 @@ int main() {
 			break;
 		case 6:
 			
-			st.show();
+			st.putStar();
 			cout << "----------------------------------------------------------" << endl;
 			break;
 		case 7:

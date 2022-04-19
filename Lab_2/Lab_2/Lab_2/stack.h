@@ -27,7 +27,7 @@ public:
 	void delTail();
 	void delHead();
 	void maxZero();
-
+	void putStar();
 
 	bool isEmpty();
 };
