@@ -56,19 +56,43 @@ void stack::show()
 
 void stack::swapTopTail()
 {
-	obj* temp = top, * tempT = top, *tempL = top;
+	if (!top->next)
+		return;
 
-	
-	while (tempL->next)
-		tempL = tempL->next;
+	if (!top->next->next) {
+		short s1 = pull();
+		short s2 = pull();
 
-	while (temp->next != tempL)
-		temp = temp->next;
+		push(s1);
+		push(s2);
+		return;
+	}
 
-	tempL->next = tempT->next;
-	top = tempL;
-	temp->next = tempT;
-	tempT->next = NULL;
+	else {
+		short first = pull();
+		obj* temp = top;
+		short count = 0;
+		while (temp->next) {
+			count++;
+			temp = temp->next;
+		}
+		short* arr = new short[count];
+
+		for (short i = 0; i < count; i++) {
+			arr[i] = pull();
+		}
+		short last = pull();
+		push(first);
+
+		for (short i = count-1; i >= 0; i--) {
+			push(arr[i]);
+		}
+
+		push(last);
+
+	}
+
+
 }
 
 void stack::reverse()
