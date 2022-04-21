@@ -177,7 +177,27 @@ void stack::delHead()
 void stack::maxZero()
 {
 
-	
+	if (!isEmpty()) {
+		stack newStack;
+		int size = 0, count = 0;
+		short max = top->data;
+		while (!isEmpty()) {
+			size++;
+			if (max < top->data) {
+				max = top->data;
+				count = size;
+			}
+			newStack.push(pull());
+			
+		}
+		for (int i = 0; i < size - count; i++) {
+			push(newStack.pull());
+		}
+		push(0);
+		push(newStack.pull());
+		while (!newStack.isEmpty())
+			push(newStack.pull());
+	}
 	
 }
 
