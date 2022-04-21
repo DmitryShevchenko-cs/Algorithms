@@ -203,7 +203,42 @@ void stack::maxZero()
 
 void stack::putStar()
 {
-	
+	obj* temp = top;
+	int count = 0;
+
+	while (temp)
+	{
+		count++;
+		temp = temp->next;
+	}
+	temp = top;
+	if (count % 2 == 0) {
+		for (int i = 0; i < count / 2; i++) {
+			cout << temp->data << " ";
+			temp = temp->next;
+		}
+		cout << '*' << ' ';
+
+		while (temp) {
+			cout << temp->data << " ";
+			temp = temp->next;
+		}
+
+	}
+	else {
+		for (int i = 0; i < count / 2 + 1; i++) {
+			cout << temp->data << " ";
+			temp = temp->next;
+		}
+		cout << '*' << ' ';
+
+		while (temp) {
+			cout << temp->data << " ";
+			temp = temp->next;
+		}
+	}
+	cout << endl;
+
 }
 
 bool stack::isEmpty()
