@@ -179,7 +179,7 @@ void stack::maxZero()
 
 	if (!isEmpty()) {
 		stack newStack;
-		int size = 0, count = 0;
+		int size = 0, count = 1;
 		short max = top->data;
 		while (!isEmpty()) {
 			size++;
