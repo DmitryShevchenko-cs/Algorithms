@@ -134,7 +134,26 @@ void stack::delEvery2()
 
 void stack::delMin()
 {
-	
+	if (!isEmpty()) {
+		stack newStack;
+		int size = 0, count = 0;
+		short min = top->data;
+		while (!isEmpty()) {
+			if (min > top->data) {
+				min = top->data;
+				count = size;
+			}
+			newStack.push(pull());
+			size++;
+		}
+		for (int i = 0; i < size - count; i++) {
+			push(newStack.pull());
+		}
+		pop();
+		while (!newStack.isEmpty())
+			push(newStack.pull());
+	}
+
 
 }
 
@@ -158,63 +177,13 @@ void stack::delHead()
 void stack::maxZero()
 {
 
-	obj* temp = top;
-	obj* tempMax = top;
-
-	short max = top->data;
-
-	while (temp) {
-		if (max < temp->data) {
-			max = temp->data;
-			tempMax = temp;
-		}
-		temp = temp->next;
-	}
-
-	temp = new obj;
-	temp->data = 0;
-	temp->next = tempMax->next;
-	tempMax->next = temp;
+	
 	
 }
 
 void stack::putStar()
 {
-	obj* temp = top;
-	int count = 0;
-
-	while (temp)
-	{
-		count++;
-		temp = temp->next;
-	}
-	temp = top;
-	if (count % 2 == 0) {
-		for (int i = 0; i < count / 2; i++) {
-			cout << temp->data << " ";
-			temp = temp->next;
-		}
-		cout << '*' << ' ';
-
-		while (temp) {
-			cout << temp->data << " ";
-			temp = temp->next;
-		}
-
-	}
-	else {
-		for (int i = 0; i < count / 2 + 1; i++) {
-			cout << temp->data << " ";
-			temp = temp->next;
-		}
-		cout << '*' << ' ';
-
-		while (temp) {
-			cout << temp->data << " ";
-			temp = temp->next;
-		}
-	}
-	cout << endl;
+	
 }
 
 bool stack::isEmpty()
