@@ -1,16 +1,17 @@
 #include "stack.h"
 
 stack::~stack()
-{
-	obj* temp = top;
-	
-	while (temp->next) {
-		temp = temp->next;
-		delete top;
+{	
+	if (!isEmpty()) {
+		obj* temp = top;
+		while (temp->next) {
+			temp = temp->next;
+			delete top;
+			top = temp;
+		}
 		top = temp;
+		delete top;
 	}
-	top = temp;
-	delete top;
 }
 
 void stack::push(short d)
@@ -119,24 +120,18 @@ void stack::reverse()
 
 void stack::delEvery2()
 {
-	obj* temp1 = top;
-	obj* temp2 = top->next;
+	obj* temp = top;
 
-	while (temp2) {
-		if (temp2->next) {
-			temp1->next = temp2->next;
-			temp1 = temp2->next;
-		}
-
-		else 
-			temp1->next = NULL;
-		delete temp2;
-
-		if (temp1->next)
-			temp2 = temp1->next;
-		else
-			temp2 = NULL;
+	stack tempSt;
+	while (!isEmpty()) {
+		tempSt.push(pull());
+		pop();
 	}
+
+	while (!tempSt.isEmpty()) 
+		push(tempSt.pull());
+	
+
 
 }
 
