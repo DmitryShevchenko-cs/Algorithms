@@ -248,3 +248,45 @@ bool stack::isEmpty()
 	else 
 		return 1;
 }
+
+void stack::readFile() {
+
+	if (isEmpty()) {
+		obj* temp = new obj;
+
+		ifstream fin("stack.txt");
+		short el;
+		if (!fin) {
+			cout << "Не вдалося відкрити файл";
+		}
+		else {
+
+			while (fin >> el) {
+				if (el != ' ')
+					push(el);
+			}
+		}
+		reverse();
+	}
+	
+}
+
+void stack::saveFile() {
+
+	if (isEmpty())
+		cout << "Список пуст" << endl;
+	else {
+		obj* temp = top;
+
+		fstream f("stack.txt", ios::out);
+		if (!f.is_open())
+			cout << "Ошибка открытия файла на запись";
+		else {
+			while (temp) {
+				f << temp->data << ' ';
+				temp = temp->next;
+			}
+		}
+	}
+
+}

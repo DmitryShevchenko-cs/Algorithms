@@ -1,5 +1,6 @@
 #include <iostream>
 #include "windows.h"
+#include "fstream"
 
 using namespace std;
 
@@ -19,6 +20,9 @@ public:
 	void pop();
 	short pull();
 	void show();
+
+	void readFile();
+	void saveFile();
 
 	void swapTopTail();
 	void reverse();
