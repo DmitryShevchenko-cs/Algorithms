@@ -11,12 +11,12 @@ struct obj {
 
 class queue {
 
-	obj* head;
+	obj* first;
 	obj* tail;
 
 public:
 
-	queue() : head(NULL), tail(NULL) {};
+	queue() : first(NULL), tail(NULL) {};
 	void Add(short el);
 	void show();
 	int count();

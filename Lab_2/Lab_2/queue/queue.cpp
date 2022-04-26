@@ -3,19 +3,18 @@
 void queue::Add(short el) {
     obj* temp = new obj;
     temp->data = el;
-    if (!head) {
-        head = temp;
-        tail = head;
+    if (!first) {
+        first = temp;
+        tail = first;
     }
     else {
-        temp->data = el;
         tail->prev = temp;
         tail = temp;
     }
     temp->prev = NULL;
 }
 void queue::show() {
-    obj* temp = head;
+    obj* temp = first;
     cout << "queue: ";
     while (temp) {
         cout << temp->data << " ";
@@ -27,7 +26,7 @@ void queue::show() {
 int queue::count()
 {
     int count = 0;
-    obj* temp = head;
+    obj* temp = first;
     while (temp) {
         count++;
         temp = temp->prev;
@@ -39,7 +38,7 @@ short queue::average()
 {
     
     short avarage = 0;
-    obj* temp = head;
+    obj* temp = first;
     while (temp) {
         avarage += temp->data;
         temp = temp->prev;
@@ -49,8 +48,8 @@ short queue::average()
 
 short queue::Min()
 {
-    short min = head->data;
-    obj* temp = head->prev;
+    short min = first->data;
+    obj* temp = first->prev;
     while (temp) {
         if (min > temp->data)
             min = temp->data;
@@ -62,8 +61,8 @@ short queue::Min()
 
 short queue::Max()
 {
-    short max = head->data;
-    obj* temp = head->prev;
+    short max = first->data;
+    obj* temp = first->prev;
     while (temp) {
         if (max < temp->data)
             max = temp->data;
@@ -76,8 +75,8 @@ short queue::Max()
 short queue::prevMin()
 {
     short prevMin = 0;
-    obj* temp = head;
-    if (Min() == head->data)
+    obj* temp = first;
+    if (Min() == first->data)
         return Min();
     while (temp) {
         
@@ -108,7 +107,7 @@ void queue::readFile()
 
 void queue::saveFile()
 {
-    obj* temp = head;
+    obj* temp = first;
 
     fstream f("queue.txt", ios::out);
     if (!f.is_open())
