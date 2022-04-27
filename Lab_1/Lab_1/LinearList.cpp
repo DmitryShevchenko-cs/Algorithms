@@ -141,11 +141,8 @@ void list::swap(int choice) {
 
         temp2 = temp1->n;
 
-
-
         if (temp1 == head && temp2 == tail) // если список из двух елементов
         { 
-
             temp1->n = NULL;
             temp2->n = temp1;
             temp1->p = temp2;
@@ -153,12 +150,10 @@ void list::swap(int choice) {
             head = temp2;
             tail = temp1;
             return;
-
         }
 
         if (temp1->p == NULL) // если два первых елемента
         { 
-
             temp2->n->p = temp1;
             temp1->n = temp2->n;
             temp2->n = temp1;
@@ -176,20 +171,16 @@ void list::swap(int choice) {
             temp1->p = temp2;
             temp1->n = NULL;
             tail = temp1;
-
             return;
         }
 
         else {
             temp1->p->n = temp2;
             temp2->n->p = temp1;
-
             temp1->n = temp2->n;
             temp2->n = temp1;
-
             temp2->p = temp1->p;
             temp1->p = temp2;
-
             return;
         }
     }

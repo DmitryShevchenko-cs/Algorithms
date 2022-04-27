@@ -100,12 +100,11 @@ void circularList::Add(char ch)//+++
         
     }
 }
-void circularList::del(char ch)// если последний
+void circularList::del(char ch)
 {
     if (isEmpty())
         cout << "Список пуст" << endl;
     else {
-       
         Data* tempR;
 
         if (ch == head->data) { // first
@@ -119,7 +118,6 @@ void circularList::del(char ch)// если последний
 
         else {
             Data* temp = head;
-
             while (ch != temp->data)
             {
                 temp = temp->n;
@@ -131,26 +129,20 @@ void circularList::del(char ch)// если последний
             prev->n = temp->n;
             next->p = temp->p;
         }
-
-
     }
 }
-short circularList::number() //+++
+short circularList::number() 
 {
     short num = 0;
-
     Data* temp = head;
-
     do
     {
         num++;
         temp = temp->n;
     } while (temp != head);
-
-
     return num;
-
 }
+
 void circularList::swap(char ch)//+++
 {
     if (isEmpty())
