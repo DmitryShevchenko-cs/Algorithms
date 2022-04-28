@@ -63,7 +63,6 @@ void stack::swapTopTail()
 	if (!top->next->next) {
 		short s1 = pull();
 		short s2 = pull();
-
 		push(s1);
 		push(s2);
 		return;
@@ -90,10 +89,7 @@ void stack::swapTopTail()
 		}
 
 		push(last);
-
 	}
-
-
 }
 
 void stack::reverse()
@@ -104,30 +100,21 @@ void stack::reverse()
 		count++;
 		temp = temp->next;
 	}
-
 	short *arr = new short[count];
-
-	for (short i = 0; i < count; i++) {
+	for (short i = 0; i < count; i++) 
 		arr[i] = pull();
-	}
-
-	for (short i = 0; i < count; i++) {
+	for (short i = 0; i < count; i++) 
 		push(arr[i]);
-	}
-
-
 }
 
 void stack::delEvery2()
 {
 	obj* temp = top;
-
 	stack tempSt;
 	while (!isEmpty()) {
 		tempSt.push(pull());
 		pop();
 	}
-
 	while (!tempSt.isEmpty()) 
 		push(tempSt.pull());
 }
@@ -153,30 +140,24 @@ void stack::delMin()
 		while (!newStack.isEmpty())
 			push(newStack.pull());
 	}
-
-
 }
 
 void stack::delTail()
 {
-
 	short temp = pull();
 	while (!isEmpty())
 		pop();
 	push(temp);
-
 }
 
 void stack::delHead()
 {
 	while (top->next)
 		pop();
-
 }
 
 void stack::maxZero()
 {
-
 	if (!isEmpty()) {
 		stack newStack;
 		int size = 0, count = 1;
@@ -198,14 +179,12 @@ void stack::maxZero()
 		while (!newStack.isEmpty())
 			push(newStack.pull());
 	}
-	
 }
 
 void stack::putStar()
 {
 	obj* temp = top;
 	int count = 0;
-
 	while (temp)
 	{
 		count++;
@@ -238,7 +217,6 @@ void stack::putStar()
 		}
 	}
 	cout << endl;
-
 }
 
 bool stack::isEmpty()

@@ -51,19 +51,16 @@ short deque::read6El()
     else cout << "ƒек м≥стить меньше 6 елемент≥в" << endl;
     return 0;
 }
-
 short deque::readlast()
 {
     return right->data;
 }
-
 bool deque::isEmpty()
 {
     if (left)
         return false;
     else return true;
 }
-
 void deque::readFile()
 {
     obj* temp = new obj;
@@ -81,7 +78,6 @@ void deque::readFile()
         }
     }
 }
-
 void deque::saveFile()
 {
     obj* temp = left;
@@ -96,7 +92,6 @@ void deque::saveFile()
         }
     }
 }
-
 int deque::count()
 {
     int count = 0;
