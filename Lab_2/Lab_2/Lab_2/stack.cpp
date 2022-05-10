@@ -142,7 +142,7 @@ void stack::delMin()
 	}
 }
 
-void stack::delTail()
+void stack::delHead()
 {
 	short temp = pull();
 	while (!isEmpty())
@@ -150,7 +150,7 @@ void stack::delTail()
 	push(temp);
 }
 
-void stack::delHead()
+void stack::delTail()
 {
 	while (top->next)
 		pop();
@@ -166,7 +166,7 @@ void stack::maxZero()
 			size++;
 			if (max < top->data) {
 				max = top->data;
-				count = size;
+				count = size - 1;
 			}
 			newStack.push(pull());
 			

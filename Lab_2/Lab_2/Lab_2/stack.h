@@ -28,8 +28,8 @@ public:
 	void reverse();
 	void delEvery2();
 	void delMin();
-	void delTail();
 	void delHead();
+	void delTail();
 	void maxZero();
 	void putStar();
 

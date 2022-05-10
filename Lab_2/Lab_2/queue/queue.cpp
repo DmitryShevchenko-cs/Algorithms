@@ -93,3 +93,29 @@ void queue::saveFile()
         }
     }
 }
+
+short queue::Min()
+{
+    short min = first->data;
+    obj* temp = first->prev;
+    while (temp) {
+        if (min > temp->data)
+            min = temp->data;
+        temp = temp->prev;
+    }
+
+    return min;
+}
+
+short queue::Max()
+{
+    short max = first->data;
+    obj* temp = first->prev;
+    while (temp) {
+        if (max < temp->data)
+            max = temp->data;
+        temp = temp->prev;
+    }
+
+    return max;
+}
