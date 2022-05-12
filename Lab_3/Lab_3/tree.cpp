@@ -205,15 +205,45 @@ void bTree::delEl(obj* el, string name)
 		}
 		else el->l = NULL;
 	}
-	else if (name < el->name) {
+	else if (name < el->r->name) {
 		delEl(el->r, name);
 	}
-	else if (name > el->r->name || name > el->l->name)
+	else if (name > el->l->name)
 		delEl(el->l, name);
 }
 void bTree::delEl(obj* el, int num)
 {
-	
+	if (el == NULL)
+		return;
+	obj* temp = NULL;
+	if (num == el->r->num) {
+		if (el->r->l != NULL) {
+			temp = el->r->l;
+		}
+		if (el->r->r != NULL) {
+			el->r = el->r->r;
+			if (temp)
+				add4num(temp->name, temp->year, temp->num);
+		}
+
+		else el->r = NULL;
+	}
+	else if (num == el->l->num) {
+		if (el->l->r != NULL) {
+			temp = el->l->r;
+		}
+		if (el->l->l != NULL) {
+			el->l = el->l->l;
+			if (temp)
+				add4num(temp->name, temp->year, temp->num);
+		}
+		else el->l = NULL;
+	}
+	else if (num < el->r->num) {
+		delEl(el->r, num);
+	}
+	else if (num > el->l->num)
+		delEl(el->l, num);
 }
 
 
