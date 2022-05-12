@@ -25,19 +25,28 @@ public:
 	//організоване за порядком текстового поля. Роздрукувати отримане бінарне дерево.
 	void create(string Name, int Year, int Num);
 	void add(string Name, int Year, int Num);
-	void show(obj* temp);
+	void add4num(string Name, int Year, int Num);
+	void print_Tree(obj* temp, int level = 0);
 
 	//Знайти середнєзначення одного з числових полів, зчитуючи дані з дерева.
 	void avarageNum(obj* temp);
 	int getAv();
 
+	//обходы
 	void preOrder(obj* temp);
 	void postOrder(obj* temp);
 	void symmetricOrder(obj* temp);
 
+	// удаления
 	void delBT(obj* temp);
+	void delL();
+	void delR();
+	void delEl(obj* el, string name);
+	void delEl(obj* el, int num);
 
-	void print_Tree(obj* temp, int level = 0);
+	//по новому ключу
+	void newTree(obj* temp, bTree &tr);
+	
 
-	bool isEpty();
+	bool isEmpty();
 };
