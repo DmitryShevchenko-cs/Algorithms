@@ -212,7 +212,7 @@ void bTree::RemoveNode(obj* parent, obj* curr, string Name) {
 	}
 }
 
-void  bTree::Remove(string Name) {
+void bTree::Remove(string Name) {
 	obj* temp = root;
 	obj* parent = temp;
 	bool flag = false;
