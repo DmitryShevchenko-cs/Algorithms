@@ -9,7 +9,10 @@ struct obj {
 	int year;
 	int num;
 
-	obj *r, *l;
+	obj *right = NULL, *left = NULL;
+
+	string color;
+	obj* parent = NULL;
 };
 
 class bTree {
@@ -41,12 +44,16 @@ public:
 	void delBT(obj* temp);
 	void delL();
 	void delR();
-	void delEl(obj* el, string name);
-	void delEl(obj* el, int num);
+
+	void RemoveNode(obj* parent, obj* curr, string Name);
+	void Remove(string Name);
+	void RemoveNode(obj* parent, obj* curr, int Num);
+	void Remove(int Num);
 
 	//по новому ключу
 	void newTree(obj* temp, bTree &tr);
 	
+	void paint(obj* temp);
 
 	bool isEmpty();
 };

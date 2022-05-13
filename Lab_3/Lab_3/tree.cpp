@@ -7,8 +7,9 @@ void bTree::create(string Name, int Year, int Num)
 		temp->name = Name;
 		temp->year = Year;
 		temp->num = Num;
+		temp->color = "BLACK";
 		root = temp;
-		root->l = root->r = NULL;
+		root->left = root->right = NULL;
 		count++;
 	}
 	else
@@ -23,25 +24,24 @@ void bTree::add(string Name, int Year, int Num)
 		ob->name = Name;
 		ob->year = Year;
 		ob->num = Num;
-		ob->r = ob->l = NULL;
 		while (true) {
 			if (Name > temp->name) {
-				if (temp->l == NULL) {
-					temp->l = ob;
+				if (temp->left == NULL) {
+					temp->left = ob;
 					count++;
 					break;
 				}
 				else
-					temp = temp->l;
+					temp = temp->left;
 			}
 			else if (Name <= temp->name) {
-				if (temp->r == NULL) {
-					temp->r = ob;
+				if (temp->right == NULL) {
+					temp->right = ob;
 					count++;
 					break;
 				}
 				else
-					temp = temp->r;
+					temp = temp->right;
 			}
 		}
 	}
@@ -57,25 +57,24 @@ void bTree::add4num(string Name, int Year, int Num)
 		ob->name = Name;
 		ob->year = Year;
 		ob->num = Num;
-		ob->r = ob->l = NULL;
 		while (true) {
 			if (Num > temp->num) {
-				if (temp->l == NULL) {
-					temp->l = ob;
+				if (temp->left == NULL) {
+					temp->left = ob;
 					count++;
 					break;
 				}
 				else
-					temp = temp->l;
+					temp = temp->left;
 			}
 			else if (Num <= temp->num) {
-				if (temp->r == NULL) {
-					temp->r = ob;
+				if (temp->right == NULL) {
+					temp->right = ob;
 					count++;
 					break;
 				}
 				else
-					temp = temp->r;
+					temp = temp->right;
 			}
 			else {
 				cout << "Такий елемент вже існує" << endl;
@@ -91,7 +90,7 @@ void bTree::print_Tree(obj* temp, int level)
 {
 	if (temp)
 	{
-		print_Tree(temp->r, level + 1);
+		print_Tree(temp->right, level + 1);
 
 		for (int i = 0; i < level; i++) cout << "\t\t";
 		cout << "Назва: " << temp->name << endl;
@@ -102,7 +101,7 @@ void bTree::print_Tree(obj* temp, int level)
 		for (int i = 0; i < level; i++) cout << "\t\t";
 		cout << "Кіль-сть: " << temp->num << endl;
 
-		print_Tree(temp->l, level + 1);
+		print_Tree(temp->left, level + 1);
 	}
 }
 
@@ -111,9 +110,9 @@ void bTree::avarageNum(obj* temp)
 {
 	if (temp != NULL)
 	{
-		avarageNum(temp->l);
+		avarageNum(temp->left);
 		avarage += temp->num;
-		avarageNum(temp->r);
+		avarageNum(temp->right);
 	}
 	
 }
@@ -129,8 +128,8 @@ void bTree::preOrder(obj* temp)
 	if (temp != NULL)
 	{
 		cout << temp->name << ' ';
-		preOrder(temp->l);
-		preOrder(temp->r);
+		preOrder(temp->left);
+		preOrder(temp->right);
 	}
 }
 
@@ -138,8 +137,8 @@ void bTree::postOrder(obj* temp)
 {
 	if (temp != NULL)
 	{
-		postOrder(temp->l);
-		postOrder(temp->r);
+		postOrder(temp->left);
+		postOrder(temp->right);
 		cout << temp->name << ' ';
 	}
 }
@@ -148,9 +147,9 @@ void bTree::symmetricOrder(obj* temp)
 {
 	if (temp != NULL)
 	{
-		symmetricOrder(temp->l);
+		symmetricOrder(temp->left);
 		cout << temp->name << ' ';
-		symmetricOrder(temp->r);
+		symmetricOrder(temp->right);
 	}
 }
 
@@ -159,107 +158,163 @@ void bTree::delBT(obj* temp)
 {
 	if (temp != NULL)
 	{
-		delBT(temp->l);
-		delBT(temp->r);
+		delBT(temp->left);
+		delBT(temp->right);
 		delete temp;
 	}
 }
 
 void bTree::delL()
 {
-	delBT(root->l);
-	root->l = NULL;
+	delBT(root->left);
+	root->left = NULL;
 }
 
 void bTree::delR()
 {
-	delBT(root->r);
-	root->r = NULL;
+	delBT(root->right);
+	root->right = NULL;
 }
 
-void bTree::delEl(obj* el, string name)
-{
-	if (el == NULL)
-		return;
-	obj* temp = NULL;
-	if (name == el->r->name) {
-		if (el->r->l != NULL) {
-			temp = el->r->l;
+void bTree::RemoveNode(obj* parent, obj* curr, string Name) {
+	if (curr == nullptr) { return; }
+	if (curr->name == Name) {
+		//CASE -- 1
+		if (curr->left == nullptr && curr->right == nullptr) {
+			if (parent->name == curr->name) { root = nullptr; }
+			else if (parent->right == curr) { parent->right = nullptr; }
+			else { parent->left = nullptr; }
 		}
-		if (el->r->r != NULL) {
-			el->r = el->r->r;
-			if (temp)
-				add(temp->name, temp->year, temp->num);
+		//CASE -- 2
+		else if (curr->left != nullptr && curr->right == nullptr) {
+			auto swap = curr->name;
+			curr->name = curr->left->name;
+			curr->left->name = swap;
+			RemoveNode(curr, curr->right, Name);
 		}
-		
-		else el->r = NULL;
+		else if (curr->left == nullptr && curr->right != nullptr) {
+			auto swap = curr->name;
+			curr->name = curr->right->name;
+			curr->right->name = swap;
+			RemoveNode(curr, curr->right, Name);
+		}
+		//CASE -- 3
+		else {
+			bool flag = false;
+			obj* temp = curr->right;
+			while (temp->left) { flag = true; parent = temp; temp = temp->left; }
+			if (!flag) { parent = curr; }
+			auto swap = curr->name;
+			curr->name = temp->name;
+			temp->name = swap;
+			RemoveNode(parent, temp, swap);
+		}
 	}
-	else if (name == el->l->name) {
-		if (el->l->r != NULL) {
-			temp = el->l->r;
-		}
-		if (el->l->l != NULL) {
-			el->l = el->l->l;
-			if (temp)
-				add(temp->name, temp->year, temp->num);
-		}
-		else el->l = NULL;
-	}
-	else if (name < el->r->name) {
-		delEl(el->r, name);
-	}
-	else if (name > el->l->name)
-		delEl(el->l, name);
 }
-void bTree::delEl(obj* el, int num)
-{
-	if (el == NULL)
-		return;
-	obj* temp = NULL;
-	if (num == el->r->num) {
-		if (el->r->l != NULL) {
-			temp = el->r->l;
-		}
-		if (el->r->r != NULL) {
-			el->r = el->r->r;
-			if (temp)
-				add4num(temp->name, temp->year, temp->num);
-		}
 
-		else el->r = NULL;
-	}
-	else if (num == el->l->num) {
-		if (el->l->r != NULL) {
-			temp = el->l->r;
+void  bTree::Remove(string Name) {
+	obj* temp = root;
+	obj* parent = temp;
+	bool flag = false;
+	if (temp == nullptr) { RemoveNode(nullptr, nullptr, Name); }
+
+	while (temp) {
+		if (Name == temp->name) { 
+			flag = true; 
+			RemoveNode(parent, temp, Name); 
+			break; 
 		}
-		if (el->l->l != NULL) {
-			el->l = el->l->l;
-			if (temp)
-				add4num(temp->name, temp->year, temp->num);
+		else if (Name < temp->name) { 
+			parent = temp; 
+			temp = temp->right; 
 		}
-		else el->l = NULL;
+		else { 
+			parent = temp; 
+			temp = temp->left; 
+		}
 	}
-	else if (num < el->r->num) {
-		delEl(el->r, num);
-	}
-	else if (num > el->l->num)
-		delEl(el->l, num);
+
+	if (!flag) { cout << "\nElement doesn't exist in the table"; }
 }
+void bTree::RemoveNode(obj* parent, obj* curr, int Num)
+{
+	if (curr == nullptr) { return; }
+	if (curr->num == Num) {
+		//CASE -- 1
+		if (curr->left == nullptr && curr->right == nullptr) {
+			if (parent->num == curr->num) { root = nullptr; }
+			else if (parent->right == curr) { parent->right = nullptr; }
+			else { parent->left = nullptr; }
+		}
+		//CASE -- 2
+		else if (curr->left != nullptr && curr->right == nullptr) {
+			auto swap = curr->num;
+			curr->num = curr->left->num;
+			curr->left->num = swap;
+			RemoveNode(curr, curr->right, Num);
+		}
+		else if (curr->left == nullptr && curr->right != nullptr) {
+			auto swap = curr->num;
+			curr->num = curr->right->num;
+			curr->right->num = swap;
+			RemoveNode(curr, curr->right, Num);
+		}
+		//CASE -- 3
+		else {
+			bool flag = false;
+			obj* temp = curr->right;
+			while (temp->left) { flag = true; parent = temp; temp = temp->left; }
+			if (!flag) { parent = curr; }
+			auto swap = curr->num;
+			curr->num = temp->num;
+			temp->num = swap;
+			RemoveNode(parent, temp, swap);
+		}
+	}
+}
+void bTree::Remove(int Num)
+{
+	obj* temp = root;
+	obj* parent = temp;
+	bool flag = false;
+	if (temp == nullptr) { RemoveNode(nullptr, nullptr, Num); }
+
+	while (temp) {
+		if (Num == temp->num) {
+			flag = true;
+			RemoveNode(parent, temp, Num);
+			break;
+		}
+		else if (Num < temp->num) {
+			parent = temp;
+			temp = temp->right;
+		}
+		else {
+			parent = temp;
+			temp = temp->left;
+		}
+	}
+
+	if (!flag) { cout << "\nElement doesn't exist in the table"; }
+}
+
 
 
 void bTree::newTree(obj* temp, bTree& tr)
 {
 	if (temp != NULL)
 	{
-		
+
 		tr.add4num(temp->name, temp->year, temp->num);
-		newTree(temp->l, tr);
-		newTree(temp->r, tr);
+		newTree(temp->left, tr);
+		newTree(temp->right, tr);
 	}
 }
 
-
-
+void bTree::paint(obj* temp)
+{
+	
+}
 
 
 bool bTree::isEmpty()
