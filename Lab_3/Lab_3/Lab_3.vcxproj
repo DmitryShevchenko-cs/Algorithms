@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{8f3f93e8-4fc0-4fde-ad00-a90d378fb6dd}</ProjectGuid>
+    <ProjectGuid>{bc3a1e99-dc3d-4b3b-a340-fae7c0c6442d}</ProjectGuid>
     <RootNamespace>Lab3</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -139,11 +139,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="tree.h" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="bTree.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="tree.cpp" />
+    <ClInclude Include="bTree.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
