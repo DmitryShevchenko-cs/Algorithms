@@ -146,6 +146,9 @@ int main() {
 			cout << "----------------------------------------------------------" << endl;
 			break;
 		case 4:
+			save(rb.getRoot());
+			break;
+		case 5:
 			cout << "Âèõ³ä..."<<endl;
 			exit(1);
 			break;

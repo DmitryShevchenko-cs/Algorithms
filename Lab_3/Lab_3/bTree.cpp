@@ -25,7 +25,8 @@ void menu_rb() {
 	cout << "1 - Додати елемент" << endl;
 	cout << "2 - Видалити вузол" << endl;
 	cout << "3 - Вивести у вигляді дерева" << endl;
-	cout << "4 - Вихід" << endl;
+	cout << "4 - Зберігти" << endl;
+	cout << "5 - Вихід" << endl;
 	cout << "---------------------------" << endl;
 }
 
@@ -47,7 +48,7 @@ void bTree::add(string Name, int Year, int Num)
 				else
 					temp = temp->left;
 			}
-			else if (Name <= temp->name) {
+			else if (Name < temp->name) {
 				if (temp->right == NULL) {
 					temp->right = ob;
 					count++;
@@ -404,6 +405,7 @@ void rbTree::RightRotate(node* x) {
 
 	if (x->left) { x->left->parent = x; }
 }
+
 void rbTree::addRB(string Name, int Year, int Num)
 {
 	if (!isEmpty()) {
@@ -424,7 +426,7 @@ void rbTree::addRB(string Name, int Year, int Num)
 				else
 					temp = temp->left;
 			}
-			else if (Num <= temp->num) {
+			else if (Num < temp->num) {
 				if (temp->right == NULL) {
 					temp->right = newnode;
 					newnode->color = "RED";
@@ -621,5 +623,34 @@ void rbTree::print_RBTree(node* temp, int level)
 		cout << "Кіль-сть: " << temp->num << endl;
 
 		print_RBTree(temp->left, level + 1);
+	}
+}
+
+void save(node* temp, int level)
+{
+	fstream f("tree.txt", ios::out);
+	if (!f.is_open())
+		cout << "Ошибка открытия файла";
+	else {
+		save_tree(f, temp);
+	}
+}
+
+void save_tree(fstream& f, node* temp, int level) {
+
+	if (temp) {
+		save_tree(f, temp->right, level + 1);     
+		for (int i = 0; i < level; i++) f << "\t\t\t";
+		f << "Колір: " << temp->color << endl;
+
+		for (int i = 0; i < level; i++) f << "\t\t\t";
+		f << "Назва: " << temp->name << endl;
+
+		for (int i = 0; i < level; i++) f << "\t\t\t";
+		f << "Рік: " << temp->year << endl;
+
+		for (int i = 0; i < level; i++) f << "\t\t\t";
+		f << "Кіль-сть: " << temp->num << endl;                 
+		save_tree(f, temp->left, level + 1);     
 	}
 }

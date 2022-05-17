@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include "windows.h"
+#include <fstream>
 
 using namespace std;
 
@@ -17,6 +18,7 @@ struct node {
 class rbTree {
 
 	node* root;
+	
 public:
 
 	rbTree() : root(NULL) {};
@@ -31,6 +33,7 @@ public:
 	void RB_Delete_Fixup(node* z);
 	void RemoveRBNode(int Num);
 
+	void save();
 	bool isEmpty() { return root == NULL ? true : false; };
 };
 
@@ -42,6 +45,7 @@ class bTree {
 	void avarageNum(node* temp);
 	void add4num(string Name, int Year, int Num);
 	void RemoveNode(node* parent, node* curr, string Name);
+	
 public:
 
 	node* getRoot() { return root; }
@@ -73,6 +77,7 @@ public:
 
 	bool isEmpty() { return root==NULL ? true : false; }
 };
-
+void save(node* temp, int level = 0);
+void save_tree(fstream& f, node* temp, int level = 0);
 void menu_b();
 void menu_rb();
