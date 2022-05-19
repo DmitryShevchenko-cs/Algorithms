@@ -55,7 +55,7 @@ namespace Lab_4
                         Random rd = new Random();
                         for (int i = 0; i < arr.Length; i++)
                         {
-                            arr[i] = rd.Next(0, 50);
+                            arr[i] = rd.Next(0, 10000);
                         }
                         foreach (int i in arr)
                             Console.Write($"{i} ");
@@ -65,15 +65,31 @@ namespace Lab_4
                     case 4:
                         if (arr.Length > 0)
                         {
+                            Console.WriteLine("Неотсортерованый массив:");
                             sw.Reset();
                             sw.Start();
                             BubbleSort.Sort(arr);
                             sw.Stop();
+                            Console.WriteLine($"Время потрачено : {sw.Elapsed}");
+
+                            Console.WriteLine("Отсортерованый массив:");
+                            sw.Reset();
+                            sw.Start();
+                            BubbleSort.Sort(arr);
+                            sw.Stop();
+                            Console.WriteLine($"Время потрачено : {sw.Elapsed}");
+
+                            Console.WriteLine("Массив в обратном порядке:");
+                            BubbleSort.unSort(arr);
+                            sw.Reset();
+                            sw.Start();
+                            BubbleSort.Sort(arr);
+                            sw.Stop();
+                            Console.WriteLine($"Время потрачено : {sw.Elapsed}");
 
                             foreach (int i in arr)
                                 Console.Write($"{i} ");
                             Console.WriteLine();
-                            Console.WriteLine($"Время потрачено : {sw.Elapsed}");
                             Console.WriteLine(new string('_', 40));
                             Console.WriteLine();
                             Array.Clear(arr, 0, arr.Length);
@@ -85,15 +101,31 @@ namespace Lab_4
                     case 5:
                         if (arr.Length > 0)
                         {
+                            Console.WriteLine("Неотсортерованый массив:");
                             sw.Reset();
                             sw.Start();
                             PyramidSort.Sort(arr);
                             sw.Stop();
+                            Console.WriteLine($"Время потрачено : {sw.Elapsed}\n");
+
+                            Console.WriteLine("Отсортерованый массив:");
+                            sw.Reset();
+                            sw.Start();
+                            PyramidSort.Sort(arr);
+                            sw.Stop();
+                            Console.WriteLine($"Время потрачено : {sw.Elapsed}\n");
+
+                            Console.WriteLine("Массив в обратном порядке:");
+                            BubbleSort.unSort(arr);
+                            sw.Reset();
+                            sw.Start();
+                            PyramidSort.Sort(arr);
+                            sw.Stop();
+                            Console.WriteLine($"Время потрачено : {sw.Elapsed}\n");
 
                             foreach (int i in arr)
                                 Console.Write($"{i} ");
                             Console.WriteLine();
-                            Console.WriteLine($"Время потрачено : {sw.Elapsed}\n");
                             Console.WriteLine(new string('_', 40));
                             Console.WriteLine();
                             Array.Clear(arr, 0, arr.Length);
@@ -105,15 +137,31 @@ namespace Lab_4
                     case 6:
                         if (arr.Length > 0)
                         {
+                            Console.WriteLine("Неотсортерованый массив:");
                             sw.Reset();
                             sw.Start();
                             CountingSort.Sort(arr);
                             sw.Stop();
+                            Console.WriteLine($"Время потрачено : {sw.Elapsed}\n");
+
+                            Console.WriteLine("Отсортерованый массив:");
+                            sw.Reset();
+                            sw.Start();
+                            CountingSort.Sort(arr);
+                            sw.Stop();
+                            Console.WriteLine($"Время потрачено : {sw.Elapsed}\n");
+
+                            Console.WriteLine("Массив в обратном порядке:");
+                            BubbleSort.unSort(arr);
+                            sw.Reset();
+                            sw.Start();
+                            CountingSort.Sort(arr);
+                            sw.Stop();
+                            Console.WriteLine($"Время потрачено : {sw.Elapsed}\n");
 
                             foreach (int i in arr)
                                 Console.Write($"{i} ");
                             Console.WriteLine();
-                            Console.WriteLine($"Время потрачено : {sw.Elapsed}\n");
                             Console.WriteLine(new string('_', 40));
                             Console.WriteLine();
                             Array.Clear(arr, 0, arr.Length);

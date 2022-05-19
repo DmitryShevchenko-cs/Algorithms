@@ -10,36 +10,39 @@ namespace Lab_4
     {
         public static void Sort(int[] array)
         {
-            int length = array.Length;
-
-            int[] output = new int[length];
-
-            int[] count = new int[100];
-            for (int i = 0; i < 100; ++i)
+           
+            var min = array[0];
+            var max = array[0];
+            foreach (int element in array)
             {
-                count[i] = 0;
-            }
-            for (int i = 0; i < length; ++i)
-            {
-                ++count[array[i]];
-            }
-
-            for (int i = 1; i <= 99; ++i)
-            {
-                count[i] += count[i - 1];
+                if (element > max)
+                {
+                    max = element;
+                }
+                else if (element < min)
+                {
+                    min = element;
+                }
             }
 
-            for (int i = length - 1; i >= 0; i--)
+            var correctionFactor = min != 0 ? -min : 0;
+            max += correctionFactor;
+
+            var count = new int[max + 1];
+            for (var i = 0; i < array.Length; i++)
             {
-                output[count[array[i]] - 1] = array[i];
-                --count[array[i]];
+                count[array[i] + correctionFactor]++;
             }
 
-            for (int i = 0; i < length; ++i)
+            var index = 0;
+            for (var i = 0; i < count.Length; i++)
             {
-                array[i] = output[i];
+                for (var j = 0; j < count[i]; j++)
+                {
+                    array[index] = i - correctionFactor;
+                    index++;
+                }
             }
         }
-
     }
 }
