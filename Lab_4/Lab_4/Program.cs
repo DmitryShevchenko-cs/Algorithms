@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
+
 namespace Lab_4
 {
     internal class Program
@@ -8,12 +10,11 @@ namespace Lab_4
         public static void menu()
         {
             Console.WriteLine("1 - Заполнить массив в ручную");
-            Console.WriteLine("2 - Заполнить массив из файла");
-            Console.WriteLine("3 - Заполнить массив случайными числами");
-            Console.WriteLine("4 - Пузырьковая сорттировка");
-            Console.WriteLine("5 - Пирамидальная сортировка");
-            Console.WriteLine("6 - Сортировка счетом");
-            Console.WriteLine("7 - Выход");
+            Console.WriteLine("2 - Заполнить массив случайными числами");
+            Console.WriteLine("3 - Пузырьковая сорттировка");
+            Console.WriteLine("4 - Пирамидальная сортировка");
+            Console.WriteLine("5 - Сортировка счетом");
+            Console.WriteLine("6 - Выход");
         } 
 
         static void Main(string[] args)
@@ -46,23 +47,17 @@ namespace Lab_4
                         Console.WriteLine("Введите размер массива: ");
                         size = Convert.ToInt32(Console.ReadLine());
                         arr = new int[size];
-                        break;
-
-                    case 3:
-                        Console.WriteLine("Введите размер массива: ");
-                        size = Convert.ToInt32(Console.ReadLine());
-                        arr = new int[size];
                         Random rd = new Random();
                         for (int i = 0; i < arr.Length; i++)
                         {
-                            arr[i] = rd.Next(0, 10000);
+                            arr[i] = rd.Next(0, size*3);
                         }
                         foreach (int i in arr)
                             Console.Write($"{i} ");
                         Console.WriteLine();
                         break;
 
-                    case 4:
+                    case 3:
                         if (arr.Length > 0)
                         {
                             Console.WriteLine("Неотсортерованый массив:");
@@ -98,7 +93,7 @@ namespace Lab_4
                             Console.WriteLine("Массив пуст");
                             break;
 
-                    case 5:
+                    case 4:
                         if (arr.Length > 0)
                         {
                             Console.WriteLine("Неотсортерованый массив:");
@@ -120,6 +115,42 @@ namespace Lab_4
                             sw.Reset();
                             sw.Start();
                             PyramidSort.Sort(arr);
+                            sw.Stop();
+                            Console.WriteLine($"Время потрачено : {sw.Elapsed}\n");
+
+                            foreach (int i in arr)
+                                Console.Write($"{i} ");
+                            Console.WriteLine();
+                            Console.WriteLine(new string('_', 40));
+                            Console.WriteLine();
+                            Array.Clear(arr, 0, arr.Length);
+                        }
+                        else
+                            Console.WriteLine("Массив пуст");
+                        break;
+
+                    case 5:
+                        if (arr.Length > 0)
+                        {
+                            Console.WriteLine("Неотсортерованый массив:");
+                            sw.Reset();
+                            sw.Start();
+                            CountingSort.Sort(arr);
+                            sw.Stop();
+                            Console.WriteLine($"Время потрачено : {sw.Elapsed}\n");
+
+                            Console.WriteLine("Отсортерованый массив:");
+                            sw.Reset();
+                            sw.Start();
+                            CountingSort.Sort(arr);
+                            sw.Stop();
+                            Console.WriteLine($"Время потрачено : {sw.Elapsed}\n");
+
+                            Console.WriteLine("Массив в обратном порядке:");
+                            BubbleSort.unSort(arr);
+                            sw.Reset();
+                            sw.Start();
+                            CountingSort.Sort(arr);
                             sw.Stop();
                             Console.WriteLine($"Время потрачено : {sw.Elapsed}\n");
 
@@ -135,42 +166,6 @@ namespace Lab_4
                         break;
 
                     case 6:
-                        if (arr.Length > 0)
-                        {
-                            Console.WriteLine("Неотсортерованый массив:");
-                            sw.Reset();
-                            sw.Start();
-                            CountingSort.Sort(arr);
-                            sw.Stop();
-                            Console.WriteLine($"Время потрачено : {sw.Elapsed}\n");
-
-                            Console.WriteLine("Отсортерованый массив:");
-                            sw.Reset();
-                            sw.Start();
-                            CountingSort.Sort(arr);
-                            sw.Stop();
-                            Console.WriteLine($"Время потрачено : {sw.Elapsed}\n");
-
-                            Console.WriteLine("Массив в обратном порядке:");
-                            BubbleSort.unSort(arr);
-                            sw.Reset();
-                            sw.Start();
-                            CountingSort.Sort(arr);
-                            sw.Stop();
-                            Console.WriteLine($"Время потрачено : {sw.Elapsed}\n");
-
-                            foreach (int i in arr)
-                                Console.Write($"{i} ");
-                            Console.WriteLine();
-                            Console.WriteLine(new string('_', 40));
-                            Console.WriteLine();
-                            Array.Clear(arr, 0, arr.Length);
-                        }
-                        else
-                            Console.WriteLine("Массив пуст");
-                        break;
-
-                    case 7:
                         return;
 
                     default:
