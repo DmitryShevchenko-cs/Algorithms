@@ -17,6 +17,10 @@ int main() {
 
 		cin >> choice;
 		switch (choice) {
+		case 0:
+			tr.delete_tree(tr.getRoot());
+			break;
+
 		case 1:
 			cout << "Введіть назву, рік так кількість номерів журналу> ";
 			cin >> name >> year >> num;
@@ -42,7 +46,7 @@ int main() {
 			break;
 
 		case 4:
-			cout << "Середнє значенняномерів: " << tr.getAv() << endl;
+			cout << "Середнє значення номерів: " << tr.getAv() << endl;
 			cout << "---------------------------" << endl;
 			tr.print_Tree(tr.getRoot());
 			cout << "----------------------------------------------------------" << endl;
@@ -110,7 +114,9 @@ int main() {
 			rb.print_RBTree(rb.getRoot());
 			cout << "----------------------------------------------------------" << endl;
 			break;
-			
+		case 13:
+			tr.delete_tree(tr.getRoot());
+			return 1;
 		default:
 			cout << "Введено невірний номер" << endl;
 			cout << "----------------------------------------------------------" << endl;

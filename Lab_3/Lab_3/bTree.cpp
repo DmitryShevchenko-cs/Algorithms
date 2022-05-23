@@ -3,6 +3,7 @@
 void menu_b() {
 
 	cout << "----------------------------------------------------------" << endl;
+	cout << "0 - Видалення дерева" << endl;
 	cout << "1 - Створити дерево" << endl;
 	cout << "2 - Додати елемент" << endl;
 	cout << "3 - Вивести у вигляді дерева" << endl;
@@ -57,6 +58,8 @@ void bTree::add(string Name, int Year, int Num)
 				else
 					temp = temp->right;
 			}
+			else if (Name == temp->name)
+				return;
 		}
 	}
 	else
@@ -181,6 +184,8 @@ void bTree::add4num(string Name, int Year, int Num)
 				else
 					temp = temp->right;
 			}
+			else if (Name == temp->name)
+				return;
 		}
 	}
 	else
@@ -436,6 +441,8 @@ void rbTree::addRB(string Name, int Year, int Num)
 				else
 					temp = temp->right;
 			}
+			else if (Name == temp->name)
+				return;
 		}
 		RB_Insert_Fixup(newnode);
 	}
