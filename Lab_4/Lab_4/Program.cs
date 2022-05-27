@@ -13,7 +13,7 @@ namespace Lab_4
             Console.WriteLine("2 - Заполнить массив случайными числами");
             Console.WriteLine("3 - Пузырьковая сорттировка");
             Console.WriteLine("4 - Пирамидальная сортировка");
-            Console.WriteLine("5 - Сортировка счетом");
+            Console.WriteLine("5 - Сортировка Шелла");
             Console.WriteLine("6 - Выход");
         } 
 
@@ -135,14 +135,14 @@ namespace Lab_4
                             Console.WriteLine("Неотсортерованый массив:");
                             sw.Reset();
                             sw.Start();
-                            CountingSort.Sort(arr);
+                            ShellSort.Sort(arr);
                             sw.Stop();
                             Console.WriteLine($"Время потрачено : {sw.Elapsed}\n");
 
                             Console.WriteLine("Отсортерованый массив:");
                             sw.Reset();
                             sw.Start();
-                            CountingSort.Sort(arr);
+                            ShellSort.Sort(arr);
                             sw.Stop();
                             Console.WriteLine($"Время потрачено : {sw.Elapsed}\n");
 
@@ -150,7 +150,7 @@ namespace Lab_4
                             BubbleSort.unSort(arr);
                             sw.Reset();
                             sw.Start();
-                            CountingSort.Sort(arr);
+                            ShellSort.Sort(arr);
                             sw.Stop();
                             Console.WriteLine($"Время потрачено : {sw.Elapsed}\n");
 
