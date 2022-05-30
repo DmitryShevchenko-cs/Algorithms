@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Diagnostics;
 
 namespace Lab5
 {
@@ -7,14 +8,8 @@ namespace Lab5
     {
         private static void menu()
         {
-            Console.WriteLine("1 - Ввести інформацію в масив з файлу");//+
-            Console.WriteLine("2 - Виконати лінійний пошук в масиві");//+
-            Console.WriteLine("3 - Виконати пошук з бар'єром");//+
-            Console.WriteLine("4 - Упорядкувати елементи масиву функцією сортування і виконати бінарний пошук");//+
-            Console.WriteLine("5 - Виконати прямий пошук підрядка");
-            Console.WriteLine("6 - Виконати алгоритм Кнута - Морріса - Пратта");//+
-            Console.WriteLine("7 - Виконати алгоритм Бойера - Мура");
-            Console.WriteLine("8 - Виконати алгоритм Рабина – Карпа");
+            Console.WriteLine("1 - Поиск в массиве");
+            Console.WriteLine("2 - Поиск подстроки");
         }
         static void Main(string[] args)
         {
@@ -24,6 +19,10 @@ namespace Lab5
             int key;
             string str;
             string podstr;
+
+            var sw = new Stopwatch();
+          
+
             while (true)
             {
                 menu();
@@ -39,48 +38,91 @@ namespace Lab5
 
                         foreach (var item in arr)
                             Console.Write(item + " ");
-
                         Console.WriteLine("");
+
+                        Console.WriteLine("Введите число для поиска");
+                        key = Convert.ToInt32(Console.ReadLine());
+
+                        Console.WriteLine("Прямой поиск");
+                        sw.Reset();
+                        sw.Start();
+                        Console.WriteLine(LinearSearch.Search(arr, key));
+                        sw.Stop();
+                        Console.WriteLine("Время: " + sw.Elapsed);
+                        Console.WriteLine("");
+
+                        Console.WriteLine("Поиск с барьером");
+                        sw.Reset();
+                        sw.Start();
+                        Console.WriteLine(LinearSearch.SearchBarrier(arr, key));
+                        sw.Stop();
+                        Console.WriteLine("Время: " + sw.Elapsed);
+                        Console.WriteLine("");
+
+                        Console.WriteLine("Бинарный поиск");
+                        BubbleSort.Sort(arr);
+                        sw.Reset();
+                        sw.Start();
+                        Console.WriteLine(LinearSearch.BinarySearch(arr, key));
+                        sw.Stop();
+                        Console.WriteLine("Время: " + sw.Elapsed);
+                        Console.WriteLine("");
+
                         break;
 
                     case 2:
-                        key = Convert.ToInt32(Console.ReadLine());
-                        Console.WriteLine(search.LinearSearch(arr, key));
+                        Console.WriteLine("Введите строку");
+                        str = Console.ReadLine();
+                        Console.WriteLine("Введите подстроку");
+                        podstr = Console.ReadLine();
+
+                        Console.WriteLine("Прямой поиск подстроки");
+                        sw.Reset();
+                        sw.Start();
+                        Console.WriteLine(FindStr.FindSubstring(podstr, str));
+                        sw.Stop();
+                        Console.WriteLine("Время: " + sw.Elapsed);
+                        Console.WriteLine("");
+
+                        int[] indexArr;
+
+                        Console.WriteLine("Алгоритм Кнута-Морріса-Пратта");
+                        sw.Reset();
+                        sw.Start();
+                        indexArr = FindStr.KnuthSearch(str, podstr);
+                        sw.Stop();
+                        foreach (var ind in indexArr)
+                            Console.Write(ind + " ");
+                        Console.WriteLine("\nВремя: " + sw.Elapsed);
+                        Console.WriteLine("");
+
+                        Console.WriteLine("алгоритм Бойера-Мура");
+                        sw.Reset();
+                        sw.Start();
+                        indexArr = FindStr.BoyerSerch(str, podstr);
+                        sw.Stop();
+                        foreach (var ind in indexArr)
+                            Console.Write(ind + " ");
+                        Console.WriteLine("\nВремя: " + sw.Elapsed);
+                        Console.WriteLine("");
+
+                        Console.WriteLine("Алгоритм Рабина–Карпа");
+                        sw.Reset();
+                        sw.Start();
+                        indexArr = FindStr.KarpSearch(str, podstr);
+                        sw.Stop();
+                        foreach (var ind in indexArr)
+                            Console.Write(ind + " ");
+                        Console.WriteLine("\nВремя: " + sw.Elapsed);
+                        Console.WriteLine("");
+
                         break;
 
                     case 3:
-                        key = Convert.ToInt32(Console.ReadLine());
-                        Console.WriteLine(search.LinearSearchBarrier(arr, key));
-                        break;
 
-                    case 4:
-                        BubbleSort.Sort(arr);
-                        key = Convert.ToInt32(Console.ReadLine());
-                        Console.WriteLine(search.BinarySearch(arr, key));
                         break;
-
-                    case 5:
-                        Console.WriteLine("Введите строку");
-                        str = Console.ReadLine();
-                        Console.WriteLine("Введите подстроку");
-                        podstr = Console.ReadLine();
-                        Console.WriteLine(str.IndexOf(podstr));
-                        break;
-
-                    case 6:
-                        Console.WriteLine("Введите строку");
-                        str = Console.ReadLine();
-                        Console.WriteLine("Введите подстроку");
-                        podstr = Console.ReadLine();
-                        Console.WriteLine(FIndStr.FindSubstring(podstr,str));
-                        break;
-
-                    case 7:
-                        Console.WriteLine("Введите строку");
-                        str = Console.ReadLine();
-                        Console.WriteLine("Введите подстроку");
-                        podstr = Console.ReadLine();
-                        Console.WriteLine(FIndStr.FindSubstring(podstr, str));
+                    default:
+                        Console.WriteLine("Невверный ввод");
                         break;
                 }
 

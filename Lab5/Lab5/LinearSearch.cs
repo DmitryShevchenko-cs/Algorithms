@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lab5
 {
-    internal class search
+    internal class LinearSearch
     {
         public static int BinarySearch(int[] inputArray, int searchValue)
         {
@@ -43,7 +43,7 @@ namespace Lab5
                 throw new ArgumentException("Довжина масиву повинна бути більше нуля");
             }
         }
-        public static int LinearSearch(int[] a, int key)
+        public static int Search(int[] a, int key)
         {
             CheckArray(a);
 
@@ -59,7 +59,7 @@ namespace Lab5
             return -1;
         }
 
-        public static int LinearSearchBarrier(int [] arr, int key)
+        public static int SearchBarrier(int [] arr, int key)
         {
             int last = arr[arr.Length - 1];//Сохраним прежний элемент массива
             arr[arr.Length - 1] = key;//Гарантируем, что value есть в массиве
