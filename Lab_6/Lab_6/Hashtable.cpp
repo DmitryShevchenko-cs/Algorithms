@@ -1,73 +1,24 @@
 #include "Hashtable.h"
 
-HashTable1::HashTable1(int c)
-{
-    this->capacity = c;
-    table = new list<int>[capacity];
-}
-void HashTable1::insertItem(int key, int data)
-{
-    int index = hashFunction(key);
-    table[index].push_back(data);
-}
-
-int HashTable1::hashFunction(int key)
-{
-    return capacity * fmod(key * ((sqrt(5) - 1 / 2)), 1);
-}
-
-void HashTable1::deleteItem(int data)
-{
-    int index = hashFunction(data);
-
-    list<int>::iterator i;
-    for (i = table[index].begin();
-        i != table[index].end(); i++)
-    {
-        if (*i == data)
-            break;
-    }
-
-    if (i != table[index].end())
-        table[index].erase(i);
-}
-
-void HashTable1::searchItem(int key)
-{
-    int index = hashFunction(key);
-    cout << "table[" << index << "]";
-    for (auto x : table[index])
-        cout << " --> " << x;
-}
-
-void HashTable1::displayHash()
-{
-    for (int i = 0; i < capacity; i++)
-    {
-        cout << "table[" << i << "]";
-        for (auto x : table[i])
-            cout << " --> " << x;
-        cout << endl;
-    }
-}
 
 
 
 
-HashTable2::HashTable2(int c)
+
+HashTable22::HashTable22(int c)
 {
     //int size = getPrime(c);
     this->capacity = c;
     table = new list<int>[capacity];
 }
 
-void HashTable2::insertItem(int key, int data)
+void HashTable22::insertItem(int key, int data)
 {
     int index = hashFunction(key);
     table[index].push_back(data);
 }
 
-int HashTable2::checkPrime(int n)
+int HashTable22::checkPrime(int n)
 {
     int i;
     if (n == 1 || n == 0)
@@ -84,7 +35,7 @@ int HashTable2::checkPrime(int n)
     return 1;
 }
 
-int HashTable2::getPrime(int n)
+int HashTable22::getPrime(int n)
 {
     if (n % 2 == 0)
     {
@@ -97,12 +48,12 @@ int HashTable2::getPrime(int n)
     return n;
 }
 
-int HashTable2::hashFunction(int key)
+int HashTable22::hashFunction(int key)
 {
     return key % capacity;
 }
 
-void HashTable2::deleteItem(int key)
+void HashTable22::deleteItem(int key)
 {
     int index = hashFunction(key);
 
@@ -118,7 +69,7 @@ void HashTable2::deleteItem(int key)
         table[index].erase(i);
 }
 
-void HashTable2::displayHash()
+void HashTable22::displayHash()
 {
     for (int i = 0; i < capacity; i++)
     {
@@ -132,13 +83,13 @@ void HashTable2::displayHash()
 
 
 
-HashTable3::HashTable3(int c)
+HashTable33::HashTable33(int c)
 {
-    int size = getPrime(c);
-    this->capacity = size;
+    //int size = getPrime(c);
+    this->capacity = c;
     table = new list<int>[capacity];
 }
-void HashTable3::insertItem1(int key, int data)
+void HashTable33::insertItem1(int key, int data)
 {
     int index = hashFunction(key);
     while (true) {
@@ -149,7 +100,7 @@ void HashTable3::insertItem1(int key, int data)
         else index++;
     }
 }
-void HashTable3::insertItem2(int key, int data)
+void HashTable33::insertItem2(int key, int data)
 {
     int index = hashFunction(key);
     while (true) {
@@ -164,7 +115,7 @@ void HashTable3::insertItem2(int key, int data)
         }
     }
 }
-void HashTable3::insertItem3(int key, int data)
+void HashTable33::insertItem3(int key, int data)
 {
     int index = hashFunction(key);
     while (true) {
@@ -176,12 +127,12 @@ void HashTable3::insertItem3(int key, int data)
     }
 }
 
-int HashTable3::hashFunction(int key)
+int HashTable33::hashFunction(int key)
 {
     return key % capacity;
 }
 
-void HashTable3::deleteItem(int key)
+void HashTable33::deleteItem(int key)
 {
     int index = hashFunction(key);
 
@@ -197,7 +148,7 @@ void HashTable3::deleteItem(int key)
         table[index].erase(i);
 }
 
-void HashTable3::displayHash()
+void HashTable33::displayHash()
 {
     for (int i = 0; i < capacity; i++)
     {
@@ -208,7 +159,7 @@ void HashTable3::displayHash()
     }
 }
 
-int HashTable3::checkPrime(int n)
+int HashTable33::checkPrime(int n)
 {
     int i;
     if (n == 1 || n == 0)
@@ -225,7 +176,7 @@ int HashTable3::checkPrime(int n)
     return 1;
 }
 
-int HashTable3::getPrime(int n)
+int HashTable33::getPrime(int n)
 {
     if (n % 2 == 0)
     {

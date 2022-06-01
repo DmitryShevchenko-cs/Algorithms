@@ -4,25 +4,14 @@
 
 using namespace std;
 
-class HashTable1
-{
-    int capacity;
-    list<int>* table;
-public:
-    HashTable1(int V);
-    void insertItem(int key, int data);
-    void deleteItem(int key);
-    void searchItem(int key);
-    int hashFunction(int key);
-    void displayHash();
-};
 
-class HashTable2 {
+
+class HashTable22 {
     int capacity;
     list <int>* table;
 
 public:
-    HashTable2(int V);
+    HashTable22(int V);
     void insertItem(int key, int data);
     void deleteItem(int key);
 
@@ -33,12 +22,12 @@ public:
     void displayHash();
 };
 
-class HashTable3 {
+class HashTable33 {
     int capacity;
     list <int>* table;
 
 public:
-    HashTable3(int V);
+    HashTable33(int V);
     void insertItem1(int key, int data);
     void insertItem2(int key, int data);
     void insertItem3(int key, int data);
@@ -50,3 +39,4 @@ public:
     int hashFunction(int key);
     void displayHash();
 };
+
