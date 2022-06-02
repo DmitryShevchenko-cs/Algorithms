@@ -29,7 +29,17 @@ public:
     int searchItemL(int key);
 
     void insertItem2(int key);
+    void deleteItem2(int key);
+    int searchItem2(int key);
+
+
+    void insertItemQuad(int key);
+    void deleteItemQuad(int key);
+    int searchItemQuad(int key);
 
     int hashFunction(int key);
+    int hashFunction2(int key) {
+        return (1 + fmod(key, capacity - 1));
+    };
     void displayHash();
 };

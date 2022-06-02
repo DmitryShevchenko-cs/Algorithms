@@ -140,8 +140,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Hash.cpp" />
-    <ClCompile Include="Hashtable.cpp" />
-    <ClCompile Include="Hashtable.h" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>

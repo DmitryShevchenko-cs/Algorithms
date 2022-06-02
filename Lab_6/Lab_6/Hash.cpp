@@ -63,12 +63,16 @@ void OpenHash::insertItemL(int key)
     int index = hashFunction(key);
     int data = key;
     while (true) {
+        if (index >= capacity) {
+            cout << "Нету свободных ячеек для " << key << endl;
+            return;
+        }
         if (infoNode[index] == 0) {
             table[index] = data;
             infoNode[index] = 1;
             return;
         }
-        else index = hashFunction(key++);
+        else index++;
     }
 }
 
@@ -78,17 +82,17 @@ void OpenHash::deleteItemL(int key)
     int index = hashFunction(key);
     int data = key;
     while (true) {
+        if (index >= capacity) {
+            cout << "Такого елемента не найдено" << endl;
+            return;
+        }
         if (table[index] == data) {
             table[index] = 0;
             infoNode[index] = 2;
             return;
         }
-        if (table[index] != data && infoNode[index + 1] != 1) {
-            cout << "Такого елемента не найдено" << endl;
-            return;
-        }
         else{
-            index = hashFunction(key++);
+            index++;
         }
     }
     
@@ -100,17 +104,17 @@ int OpenHash::searchItemL(int key)
     int index = hashFunction(key);
     int data = key;
     while (true) {
+        if (index >= capacity) {
+            cout << "Такого елемента не найдено" << endl;
+            return 0;
+        }
         if (table[index]==data) {
             cout << "table[" << index << "]";
             cout << " --> " << table[index];
             cout << endl;
             return table[index];
         }
-        if (table[index] != data && infoNode[index + 1] != 1) {
-            cout << "Такого елемента не найдено" << endl;
-            return 0;
-        }
-        else index = hashFunction(key++);
+        else index++;
     }
     return table[index];
 }
@@ -120,13 +124,63 @@ void OpenHash::insertItem2(int key)
     int index = hashFunction(key);
     int data = key;
     while (true) {
+        if (index >= capacity) {
+            cout << "Нету свободных ячеек для " << key << endl;
+            return;
+        }
         if (infoNode[index] == 0) {
             table[index] = data;
             infoNode[index] = 1;
+            cout << index << '\t';
             return;
         }
-        else index = hashFunction(key++);
+        else {
+            index = (hashFunction(key) + index * hashFunction2(key)) % capacity;
+        }
     }
+}
+
+void OpenHash::deleteItem2(int key)
+{
+    int index = hashFunction(key);
+    int data = key;
+    while (true) {
+        if (index >= capacity) {
+            cout << "Такого елемента не найдено" << endl;
+            return;
+        }
+        if (table[index] == data) {
+            table[index] = 0;
+            infoNode[index] = 2;
+            return;
+        }
+        else {
+            index = (hashFunction(key) + index * hashFunction2(key)) % capacity;
+        }
+    }
+
+
+}
+
+int OpenHash::searchItem2(int key)
+{
+    int index = hashFunction(key);
+    int data = key;
+    while (true) {
+        if (index >= capacity) {
+            cout << "Такого елемента не найдено" << endl;
+            return 0;
+        }
+        if (table[index] == data) {
+            cout << "table[" << index << "]";
+            cout << " --> " << table[index];
+            cout << endl;
+            return table[index];
+        }
+        else 
+            index = (hashFunction(key) + index * hashFunction2(key)) % capacity;
+    }
+    return table[index];
 }
 
 int OpenHash::hashFunction(int key)
