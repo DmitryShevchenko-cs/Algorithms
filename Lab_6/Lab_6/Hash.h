@@ -36,6 +36,9 @@ public:
     void insertItemQuad(int key);
     void deleteItemQuad(int key);
     int searchItemQuad(int key);
+    int hashFunctionQuad(int key, int i) {
+        return fmod(hashFunction((key) + (i * i)) , capacity);
+    }
 
     int hashFunction(int key);
     int hashFunction2(int key) {

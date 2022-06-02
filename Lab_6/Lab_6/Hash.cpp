@@ -67,7 +67,7 @@ void OpenHash::insertItemL(int key)
             cout << "Нету свободных ячеек для " << key << endl;
             return;
         }
-        if (infoNode[index] == 0) {
+        if (infoNode[index] != 1) {
             table[index] = data;
             infoNode[index] = 1;
             return;
@@ -128,7 +128,7 @@ void OpenHash::insertItem2(int key)
             cout << "Нету свободных ячеек для " << key << endl;
             return;
         }
-        if (infoNode[index] == 0) {
+        if (infoNode[index] != 1) {
             table[index] = data;
             infoNode[index] = 1;
             cout << index << '\t';
@@ -179,6 +179,73 @@ int OpenHash::searchItem2(int key)
         }
         else 
             index = (hashFunction(key) + index * hashFunction2(key)) % capacity;
+    }
+    return table[index];
+}
+
+void OpenHash::insertItemQuad(int key)
+{
+    int index = hashFunction(key);
+    int data = key;
+    int i = 1;
+    while (true) {
+        if (index >= capacity) {
+            cout << "Нету свободных ячеек для " << key << endl;
+            return;
+        }
+        if (infoNode[index] != 1) {
+            table[index] = data;
+            infoNode[index] = 1;
+            cout << index << '\t';
+            return;
+        }
+        else {
+            index = hashFunctionQuad(key, i++);
+        }
+    }
+}
+
+void OpenHash::deleteItemQuad(int key)
+{
+    int index = hashFunction(key);
+    int data = key;
+    int i = 1;
+    while (true) {
+        if (index >= capacity) {
+            cout << "Такого елемента не найдено" << endl;
+            return;
+        }
+        if (table[index] == data) {
+            table[index] = 0;
+            infoNode[index] = 2;
+            return;
+        }
+        else {
+            index = hashFunctionQuad(key, i++);
+        }
+    }
+
+
+}
+
+int OpenHash::searchItemQuad(int key)
+{
+    int index = hashFunction(key);
+    int data = key;
+    int i = 1;
+    while (true) {
+        if (index >= capacity) {
+            cout << "Такого елемента не найдено" << endl;
+            return 0;
+        }
+        if (table[index] == data) {
+            cout << "table[" << index << "]";
+            cout << " --> " << table[index];
+            cout << endl;
+            return table[index];
+        }
+        else
+            index = hashFunctionQuad(key, i++);
     }
     return table[index];
 }
