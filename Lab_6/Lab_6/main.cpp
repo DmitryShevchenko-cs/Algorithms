@@ -458,8 +458,6 @@ int main() {
 					cout << "Îøèáêà ââîäà" << endl;
 					break;
 				}
-
-
 			}
 		}
 		else
