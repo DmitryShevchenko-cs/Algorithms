@@ -37,6 +37,7 @@ int ChainHash::searchItem(int key)
     cout << "table[" << index << "]";
     for (auto x : table[index])
         cout << " --> " << x;
+    cout << endl;
     return 1;
 }
 
