@@ -132,7 +132,6 @@ void OpenHash::insertItem2(int key)
         if (infoNode[index] != 1) {
             table[index] = data;
             infoNode[index] = 1;
-            cout << index << '\t';
             return;
         }
         else {
@@ -197,7 +196,6 @@ void OpenHash::insertItemQuad(int key)
         if (infoNode[index] != 1) {
             table[index] = data;
             infoNode[index] = 1;
-            cout << index << '\t';
             return;
         }
         else {

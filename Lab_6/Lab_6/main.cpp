@@ -226,7 +226,7 @@ void lineMethod(){
 		cout << "ќшибка ввода" << endl;
 }
 
-void QuadMethod(){
+void quadMethod(){
 	int ch = 0;
 	int key[] = { 3, 42, 31,12, 33, 24, 13, 40, 10 };
 	int data;
@@ -322,6 +322,104 @@ void QuadMethod(){
 		cout << "ќшибка ввода" << endl;
 }
 
+void doubleHash()
+{
+	int ch = 0;
+	int key[] = { 3, 42, 31,12, 33, 24, 13, 40, 10 };
+	int data;
+	int* arr;
+	int size;
+	menuArr();
+	cin >> ch;
+	if (ch == 1) {
+		OpenHash DoubleHash(11);
+		for (int i = 0; i < 9; i++)
+			DoubleHash.insertItemQuad(key[i]);
+		DoubleHash.displayHash();
+		while (1) {
+			actionMenu();
+			cin >> ch;
+			switch (ch) {
+			case 1:
+				cout << "¬ведите елемент --> ";
+				cin >> data;
+				DoubleHash.insertItem2(data);
+				DoubleHash.displayHash();
+				break;
+			case 2:
+				cout << "¬ведите елемент --> ";
+				cin >> data;
+				DoubleHash.deleteItem2(data);
+				DoubleHash.displayHash();
+				break;
+			case 3:
+				cout << "¬ведите елемент --> ";
+				cin >> data;
+				DoubleHash.searchItem2(data);
+				break;
+			case 4:
+				DoubleHash.displayHash();
+				break;
+			case 5:
+				return;
+			default:
+				cout << "ќшибка ввода" << endl;
+				break;
+			}
+		}
+	}
+
+	else if (ch == 2) {
+		cout << "¬ведите размер массива --> "; cin >> size;
+		cout << "¬ведите массив размером:" << size << endl;
+		arr = new int[size];
+		for (int i = 0; i < size; i++) {
+			cin >> data;
+			arr[i] = data;
+		}
+		cout << "¬ведите размер таблицы -->"; cin >> size;
+		OpenHash DoubleHash(size);
+		for (int i = 0; i < size; i++)
+			DoubleHash.insertItem2(arr[i]);
+		while (1) {
+			actionMenu();
+			cin >> ch;
+			switch (ch) {
+			case 1:
+				cout << "¬ведите елемент --> ";
+				cin >> data;
+				DoubleHash.insertItem2(data);
+				DoubleHash.displayHash();
+				break;
+			case 2:
+				cout << "¬ведите елемент --> ";
+				cin >> data;
+				DoubleHash.deleteItem2(data);
+				DoubleHash.displayHash();
+				break;
+			case 3:
+				cout << "¬ведите елемент --> ";
+				cin >> data;
+				DoubleHash.searchItem2(data);
+				break;
+			case 4:
+				DoubleHash.displayHash();
+				break;
+			case 5:
+				return;
+			default:
+				cout << "ќшибка ввода" << endl;
+				break;
+			}
+		}
+	}
+
+	else if (ch == 3) return;
+	else
+		cout << "ќшибка ввода" << endl;
+
+}
+
 int main() {
 
 	SetConsoleCP(1251);
@@ -349,11 +447,11 @@ int main() {
 					lineMethod();
 					break;
 				case 2:
-					QuadMethod();
+					quadMethod();
 					break;
 				case 3:
+					doubleHash();
 					break;
-
 				case 4:
 					break;
 				default:
