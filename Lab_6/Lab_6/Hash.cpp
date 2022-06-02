@@ -12,7 +12,8 @@ void ChainHash::insertItem(int key)
 
 int ChainHash::hashFunction(int key)
 {
-    return capacity * fmod(key * (( (sqrt(5) - 1) / 2)), 1);
+    return fmod(key, capacity);
+    //return capacity * fmod(key * (( (sqrt(5) - 1) / 2)), 1);
 }
 
 void ChainHash::deleteItem(int key)
@@ -76,7 +77,6 @@ void OpenHash::insertItemL(int key)
         else index++;
     }
 }
-
 
 void OpenHash::deleteItemL(int key)
 {
