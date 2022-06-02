@@ -1,21 +1,21 @@
 #include "Hash.h"
 
-HashTable1::HashTable1(int c)
+ChainHash::ChainHash(int c)
 {
     this->capacity = c;
     table = new list<int>[capacity];
 }
-void HashTable1::insertItem(int key)
+void ChainHash::insertItem(int key)
 {
     table[hashFunction(key)].push_back(key);
 }
 
-int HashTable1::hashFunction(int key)
+int ChainHash::hashFunction(int key)
 {
-    return capacity * fmod(key * ((sqrt(5) - 1 / 2)), 1);
+    return capacity * fmod(key * (( (sqrt(5) - 1) / 2)), 1);
 }
 
-void HashTable1::deleteItem(int key)
+void ChainHash::deleteItem(int key)
 {
     int x = hashFunction(key);
 
@@ -31,7 +31,7 @@ void HashTable1::deleteItem(int key)
         table[x].erase(i);
 }
 
-int HashTable1::searchItem(int key)
+int ChainHash::searchItem(int key)
 {
     int index = hashFunction(key);
     cout << "table[" << index << "]";
@@ -40,7 +40,7 @@ int HashTable1::searchItem(int key)
     return 1;
 }
 
-void HashTable1::displayHash()
+void ChainHash::displayHash()
 {
     for (int i = 0; i < capacity; i++)
     {
@@ -49,4 +49,106 @@ void HashTable1::displayHash()
             cout << " --> " << x;
         cout << endl;
     }
+}
+
+OpenHash::OpenHash(int V)
+{
+    this->capacity = V;
+    table.resize(capacity);
+    infoNode.resize(capacity);
+}
+
+void OpenHash::insertItemL(int key)
+{
+    int index = hashFunction(key);
+    int data = key;
+    while (true) {
+        if (infoNode[index] == 0) {
+            table[index] = data;
+            infoNode[index] = 1;
+            return;
+        }
+        else index = hashFunction(key++);
+    }
+}
+
+
+void OpenHash::deleteItemL(int key)
+{
+    int index = hashFunction(key);
+    int data = key;
+    while (true) {
+        if (table[index] == data) {
+            table[index] = 0;
+            infoNode[index] = 2;
+            return;
+        }
+        if (table[index] != data && infoNode[index + 1] != 1) {
+            cout << "Такого елемента не найдено" << endl;
+            return;
+        }
+        else{
+            index = hashFunction(key++);
+        }
+    }
+    
+
+}
+
+int OpenHash::searchItemL(int key)
+{
+    int index = hashFunction(key);
+    int data = key;
+    while (true) {
+        if (table[index]==data) {
+            cout << "table[" << index << "]";
+            cout << " --> " << table[index];
+            cout << endl;
+            return table[index];
+        }
+        if (table[index] != data && infoNode[index + 1] != 1) {
+            cout << "Такого елемента не найдено" << endl;
+            return 0;
+        }
+        else index = hashFunction(key++);
+    }
+    return table[index];
+}
+
+void OpenHash::insertItem2(int key)
+{
+    int index = hashFunction(key);
+    int data = key;
+    while (true) {
+        if (infoNode[index] == 0) {
+            table[index] = data;
+            infoNode[index] = 1;
+            return;
+        }
+        else index = hashFunction(key++);
+    }
+}
+
+int OpenHash::hashFunction(int key)
+{
+    return fmod(key, capacity);
+}
+
+void OpenHash::displayHash()
+{
+
+    for (int i = 0; i < capacity; i++)
+    {
+        if (infoNode[i] != 1) {
+            cout << "table[" << i << "]";
+            cout << " --> " << "Empty";
+            cout << endl;
+        }
+        else {
+            cout << "table[" << i << "]";
+            cout << " --> " << table[i];
+            cout << endl;
+        }
+    }
+
 }
